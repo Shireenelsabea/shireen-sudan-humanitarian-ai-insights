@@ -31,7 +31,7 @@ Public
 Website:
 
 ```text
-https://shireen-sudan-humanitarian-ai-insights.vercel.app
+https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/
 ```
 
 Topics:

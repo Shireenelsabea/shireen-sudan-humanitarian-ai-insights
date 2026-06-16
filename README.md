@@ -7,7 +7,7 @@ A responsible AI portfolio project by **Shireen El Sabea**.
 This repository contains a complete public case study for humanitarian needs analysis in Sudan:
 
 - Interactive Streamlit dashboard
-- Vercel-ready project hub
+- Matching GitHub Pages/Vercel dashboard
 - LinkedIn carousel
 - Technical PDF report
 - Synthetic demo datasets
@@ -27,9 +27,9 @@ The goal is to show how humanitarian teams could use structured data, community 
 
 After deployment, add the final URLs here:
 
-- Vercel project hub: `https://shireen-sudan-humanitarian-ai-insights.vercel.app`
-- GitHub Pages project hub: `https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/`
-- GitHub Pages dashboard: `https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/dashboard.html`
+- GitHub Pages live dashboard: `https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/`
+- Mirrored dashboard URL: `https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/dashboard.html`
+- Optional Vercel dashboard: `https://shireen-sudan-humanitarian-ai-insights.vercel.app`
 - Optional Streamlit dashboard: `https://YOUR_STREAMLIT_APP.streamlit.app`
 - GitHub repository: `https://github.com/Shireenelsabea/shireen-sudan-humanitarian-ai-insights`
 
@@ -57,8 +57,8 @@ data/
   monthly_trends.csv             Synthetic trend data
 
 docs/
-  index.html                     Vercel project hub
-  dashboard.html                 Fully interactive GitHub Pages dashboard
+  index.html                     Fully interactive GitHub Pages/Vercel dashboard
+  dashboard.html                 Mirrored dashboard URL
   assets/                        Logo, figures, carousel images
   downloads/                     Public report and carousel PDFs
 
@@ -91,7 +91,7 @@ http://localhost:8501
 
 If port `8501` is already busy, Streamlit will suggest another local port.
 
-## Deploy The Project Hub On Vercel
+## Deploy The Live Dashboard On Vercel
 
 This repository includes a Vercel static configuration:
 
@@ -105,7 +105,7 @@ This repository includes a Vercel static configuration:
 }
 ```
 
-Vercel should serve the complete project hub from:
+Vercel should serve the live dashboard from:
 
 ```text
 docs/index.html
@@ -126,9 +126,9 @@ Use Streamlit Community Cloud for the live interactive dashboard:
 - Python version: `3.11` or `3.12`
 - Secrets: none
 
-Vercel hosts the project hub. Streamlit Community Cloud hosts the interactive Python dashboard.
+GitHub Pages and Vercel host the matching public dashboard. Streamlit Community Cloud can host the original Python dashboard if needed.
 
-## Deploy The Project Hub On GitHub Pages
+## Deploy The Live Dashboard On GitHub Pages
 
 This repository includes a GitHub Actions workflow:
 
@@ -148,13 +148,13 @@ Set the source to:
 GitHub Actions
 ```
 
-The project hub will deploy to:
+The live dashboard will deploy to:
 
 ```text
 https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/
 ```
 
-The fully interactive dashboard is hosted at:
+The same dashboard is mirrored at:
 
 ```text
 https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/dashboard.html

@@ -21,9 +21,9 @@ git remote add origin https://github.com/Shireenelsabea/shireen-sudan-humanitari
 git push -u origin main
 ```
 
-## 2. Deploy The Whole Project Hub On Vercel
+## 2. Deploy The Live Dashboard On Vercel
 
-Use Vercel for the complete project page in `docs/`.
+Use Vercel for the complete public dashboard in `docs/`.
 
 Settings:
 
@@ -36,7 +36,7 @@ Output Directory: docs
 
 The repository includes `vercel.json`, so Vercel should detect these settings automatically.
 
-## 3. Deploy The Whole Project Hub On GitHub Pages
+## 3. Deploy The Live Dashboard On GitHub Pages
 
 The repository includes:
 
@@ -57,7 +57,7 @@ Expected URL:
 https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/
 ```
 
-Interactive dashboard:
+Mirrored dashboard URL:
 
 ```text
 https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/dashboard.html
@@ -81,12 +81,12 @@ After deployment, update:
 
 - `README.md`
 - `LINKEDIN_POST.md`
-- Vercel project hub if you want the dashboard button to open the Streamlit app directly
+- Optional Vercel dashboard URL if you deploy it there too
 
 ## What Is Ready
 
-- Vercel project hub: `docs/index.html`
-- GitHub Pages dashboard: `docs/dashboard.html`
+- GitHub Pages/Vercel live dashboard: `docs/index.html`
+- Mirrored dashboard URL: `docs/dashboard.html`
 - Vercel config: `vercel.json`
 - Streamlit app: `app/app.py`
 - Dependencies: `requirements.txt`

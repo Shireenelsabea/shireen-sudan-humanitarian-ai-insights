@@ -3,12 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sudan Humanitarian AI Insights | Shireen El Sabea</title>
-    <meta name="description" content="A complete responsible AI portfolio project for humanitarian needs analysis, created by Shireen El Sabea.">
-    <meta property="og:title" content="Sudan Humanitarian AI Insights">
-    <meta property="og:description" content="A responsible AI dashboard, report, and LinkedIn carousel for humanitarian needs analysis.">
-    <meta property="og:image" content="assets/carousel/overview_all_slides.png">
-    <meta property="og:type" content="website">
+    <title>Sudan Humanitarian AI Insights</title>
+    <meta name="description" content="Interactive GitHub Pages dashboard for Shireen El Sabea's Sudan Humanitarian AI Insights project.">
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
     <style>
       :root {
         --ink: #17202a;
@@ -22,642 +19,860 @@
         --red: #b42318;
         --blue: #315a8a;
       }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
+      * { box-sizing: border-box; }
       body {
         margin: 0;
         font-family: Inter, Arial, Helvetica, sans-serif;
         color: var(--ink);
         background: var(--canvas);
       }
-
-      a {
-        color: inherit;
-      }
-
-      img {
-        display: block;
-        max-width: 100%;
-      }
-
-      .site-header {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        border-bottom: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.94);
-        backdrop-filter: blur(12px);
-      }
-
-      .nav {
-        width: min(1180px, calc(100% - 32px));
+      a { color: inherit; }
+      .page {
+        width: min(1280px, calc(100% - 32px));
         margin: 0 auto;
-        min-height: 64px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 18px;
+        padding: 32px 0 48px;
       }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 850;
-      }
-
-      .brand img {
-        width: 38px;
-        height: 38px;
-        border-radius: 8px;
+      .hero {
         border: 1px solid var(--line);
-        background: #fff;
-        object-fit: cover;
+        border-radius: 6px;
+        background: var(--paper);
+        padding: 19px 20px;
+        margin-bottom: 16px;
+        box-shadow: 0 14px 34px rgba(23,32,42,0.05);
       }
-
-      .nav-links {
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+        gap: 18px;
+        align-items: stretch;
+      }
+      .brand-row {
         display: flex;
-        flex-wrap: wrap;
-        gap: 14px;
+        gap: 12px;
         align-items: center;
+        margin-bottom: 28px;
+      }
+      .hero-logo {
+        width: 58px;
+        height: 58px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        object-fit: cover;
+        background: #fff;
+        flex: 0 0 auto;
+      }
+      .brand-mini {
         color: var(--muted);
-        font-size: 0.92rem;
+        font-size: 0.9rem;
         font-weight: 700;
       }
-
-      .nav-links a {
-        text-decoration: none;
-      }
-
-      .page {
-        width: min(1180px, calc(100% - 32px));
-        margin: 0 auto;
-      }
-
-      .hero {
-        min-height: calc(100vh - 64px);
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(340px, 0.72fr);
-        gap: 34px;
-        align-items: center;
-        padding: 48px 0 40px;
-      }
-
       .eyebrow {
+        margin: 0 0 4px;
         color: var(--green);
-        font-size: 0.82rem;
-        font-weight: 850;
+        font-size: 0.78rem;
+        font-weight: 800;
         text-transform: uppercase;
-        margin: 0 0 10px;
       }
-
-      h1, h2, h3 {
-        margin: 0;
-        letter-spacing: 0;
-      }
-
+      h1, h2, h3 { margin: 0; letter-spacing: 0; }
       h1 {
-        font-size: clamp(2.9rem, 7vw, 6rem);
-        line-height: 0.95;
-        max-width: 850px;
+        font-size: clamp(1.9rem, 3.2vw, 2.75rem);
+        line-height: 1.08;
+        margin-bottom: 20px;
       }
-
-      h2 {
-        font-size: clamp(2rem, 4vw, 3.2rem);
-        line-height: 1;
-        margin-bottom: 16px;
-      }
-
-      h3 {
-        font-size: 1.15rem;
-        margin-bottom: 8px;
-      }
-
+      h2 { font-size: clamp(1.25rem, 2.2vw, 1.65rem); margin-bottom: 10px; }
+      h3 { font-size: 1.05rem; margin-bottom: 8px; }
       p {
         color: var(--muted);
-        line-height: 1.6;
+        line-height: 1.55;
         margin: 0;
       }
-
-      .lead {
-        font-size: clamp(1.08rem, 2vw, 1.28rem);
-        max-width: 760px;
-        margin-top: 22px;
+      .creator-line {
+        color: var(--muted);
+        margin-top: 10px;
       }
-
-      .creator {
-        color: var(--ink);
-        font-weight: 800;
-        margin-top: 18px;
-      }
-
-      .button-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 28px;
-      }
-
-      .button {
-        min-height: 44px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 8px;
-        padding: 0 16px;
-        text-decoration: none;
-        font-weight: 850;
-        border: 1px solid var(--green);
-      }
-
-      .button.primary {
-        color: #fff;
-        background: var(--green);
-      }
-
-      .button.secondary {
-        color: var(--green);
-        background: #fff;
-      }
-
-      .hero-panel {
-        border: 1px solid var(--line);
-        background: var(--paper);
-        border-radius: 8px;
-        padding: 18px;
-        box-shadow: 0 20px 50px rgba(23, 32, 42, 0.08);
-      }
-
-      .logo-tile {
-        height: 230px;
-        display: grid;
-        place-items: center;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #f8fafc;
-        margin-bottom: 16px;
-      }
-
-      .logo-tile img {
-        width: min(74%, 260px);
-        filter: drop-shadow(0 14px 24px rgba(23, 32, 42, 0.12));
-      }
-
-      .facts {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-      }
-
-      .fact {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        padding: 12px;
-        background: #fff;
-      }
-
-      .fact strong {
-        display: block;
-        font-size: 1.1rem;
-        margin-bottom: 4px;
-      }
-
-      section {
-        padding: 62px 0;
-        border-top: 1px solid var(--line);
-      }
-
-      .section-head {
-        display: flex;
-        align-items: end;
-        justify-content: space-between;
-        gap: 24px;
-        margin-bottom: 24px;
-      }
-
-      .section-head p {
-        max-width: 620px;
-      }
-
-      .grid-3 {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-      }
-
-      .grid-2 {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 16px;
-      }
-
-      .card {
-        border: 1px solid var(--line);
-        background: var(--paper);
-        border-radius: 8px;
-        padding: 18px;
-      }
-
-      .card.accent {
-        border-left: 5px solid var(--green);
-      }
-
-      .metric {
-        font-size: 2rem;
-        font-weight: 900;
-        line-height: 1;
-        margin-bottom: 8px;
-      }
-
-      .tag-row {
+      .chips {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
         margin-top: 14px;
       }
-
-      .tag {
+      .chip {
+        border: 1px solid #cbd5df;
+        border-radius: 999px;
+        background: #f8fafc;
+        color: var(--ink);
+        font-size: 0.84rem;
+        font-weight: 650;
+        padding: 6px 10px;
+      }
+      .guardrail-panel {
+        height: 100%;
+        border: 1px solid #d8dee6;
+        border-radius: 6px;
+        background: #f8fafc;
+        padding: 20px 16px;
+      }
+      .guardrail-item {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        margin-top: 8px;
+        flex: 0 0 auto;
+      }
+      .contact-row {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+      .controls {
+        display: none;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin: 18px 0;
+      }
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--paper);
+        padding: 18px;
+        box-shadow: 0 8px 24px rgba(23,32,42,0.04);
+      }
+      .control-title {
+        font-weight: 850;
+        margin-bottom: 8px;
+      }
+      .check-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      label.check {
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 7px 10px;
+        background: #fff;
+        cursor: pointer;
+        font-weight: 750;
+      }
+      label.check input { accent-color: var(--green); }
+      .scope-grid, .metrics, .grid-2, .grid-3 {
+        display: grid;
+        gap: 14px;
+      }
+      .scope-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 16px; }
+      .metrics { grid-template-columns: repeat(5, minmax(0, 1fr)); margin-bottom: 18px; }
+      .grid-2 { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+      .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .scope-item {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--paper);
+        padding: 16px 14px;
+        min-height: 92px;
+      }
+      .scope-value {
+        color: var(--ink);
+        font-size: 1rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+      }
+      .scope-label {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.35;
+      }
+      .metric-value {
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        line-height: 1;
+        font-weight: 400;
+        margin: 10px 0;
+      }
+      .metric-label { color: var(--ink); font-weight: 500; }
+      .metric-note {
+        display: inline-block;
+        color: #166534;
+        background: #dcfce7;
+        border-radius: 999px;
+        padding: 4px 8px;
+        font-size: 0.82rem;
+        font-weight: 750;
+      }
+      .tabs {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        border-bottom: 1px solid var(--line);
+        margin: 12px 0 24px;
+      }
+      .tab {
+        border: 0;
+        border-bottom: 2px solid transparent;
+        background: transparent;
+        padding: 0 0 12px;
+        color: var(--ink);
+        font: inherit;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      .tab.active {
+        color: var(--green);
+        border-bottom-color: var(--green);
+      }
+      .tab-pane { display: none; }
+      .tab-pane.active { display: block; }
+      .chart {
+        width: 100%;
+        min-height: 360px;
+      }
+      .chart-note {
+        color: var(--muted);
+        font-size: 0.86rem;
+        margin: 0 0 14px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.92rem;
+      }
+      th, td {
+        border-bottom: 1px solid var(--line);
+        padding: 10px 8px;
+        text-align: left;
+        vertical-align: top;
+      }
+      th { color: var(--muted); font-size: 0.82rem; text-transform: uppercase; }
+      .table-wrap { overflow-x: auto; }
+      textarea, select {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        font: inherit;
+        background: #fff;
+      }
+      textarea { min-height: 110px; resize: vertical; }
+      .brief-title {
+        font-size: 1.8rem;
+        font-weight: 900;
+        margin-bottom: 8px;
+      }
+      .driver-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 14px 0;
+      }
+      .driver-pill {
         border: 1px solid #cbd5df;
         border-radius: 999px;
         padding: 6px 10px;
-        color: var(--ink);
         background: #f8fafc;
-        font-size: 0.86rem;
         font-weight: 800;
       }
-
-      .figure {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #fff;
-        padding: 10px;
-      }
-
-      .figure img {
-        width: 100%;
+      .button {
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         border-radius: 6px;
-      }
-
-      .artifact {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        min-height: 100%;
-      }
-
-      .artifact a {
-        margin-top: auto;
-      }
-
-      .carousel-preview {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--paper);
-        padding: 12px;
-      }
-
-      .slides {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 10px;
-      }
-
-      .slides img {
-        border: 1px solid var(--line);
-        border-radius: 6px;
+        padding: 0 14px;
+        border: 1px solid #d0d7de;
         background: #fff;
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 500;
+        cursor: pointer;
       }
-
-      .method-list {
-        display: grid;
-        gap: 12px;
-      }
-
-      .method-item {
-        display: grid;
-        grid-template-columns: 40px minmax(0, 1fr);
-        gap: 12px;
-        align-items: start;
-      }
-
-      .step {
-        width: 40px;
-        height: 40px;
-        border-radius: 999px;
-        display: grid;
-        place-items: center;
-        color: #fff;
+      .button.primary {
+        border-color: var(--green);
         background: var(--green);
-        font-weight: 900;
+        color: #fff;
       }
-
-      .note {
-        border: 1px solid #bfdbfe;
-        background: #eff6ff;
-        color: #0f4f8a;
-        border-radius: 8px;
+      .button.secondary { color: var(--ink); background: #fff; }
+      .cta-strip {
+        border: 1px solid #cfded7;
+        border-radius: 6px;
         padding: 16px;
-        font-weight: 700;
+        background: #fff;
+        margin-top: 14px;
       }
-
-      .repo-block {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #101828;
-        color: #eef2f6;
-        padding: 18px;
-        overflow-x: auto;
-      }
-
-      code {
-        font-family: Consolas, Monaco, monospace;
-      }
-
-      .site-footer {
-        border-top: 1px solid var(--line);
-        padding: 32px 0;
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+      .footer {
         color: var(--muted);
+        text-align: center;
+        padding: 30px 0 0;
       }
-
-      @media (max-width: 900px) {
-        .hero,
-        .grid-2,
-        .grid-3 {
+      @media (max-width: 980px) {
+        .hero-grid, .controls, .grid-2, .grid-3, .metrics, .scope-grid, .contact-row {
           grid-template-columns: 1fr;
         }
-
-        .hero {
-          min-height: auto;
-          padding-top: 34px;
-        }
-
-        .section-head {
-          display: block;
-        }
-
-        .section-head p {
-          margin-top: 10px;
-        }
-      }
-
-      @media (max-width: 640px) {
-        .nav {
-          align-items: flex-start;
-          flex-direction: column;
-          padding: 14px 0;
-        }
-
-        .nav-links {
-          gap: 10px;
-        }
-
-        .facts,
-        .slides {
-          grid-template-columns: 1fr;
-        }
-
-        h1 {
-          font-size: 3rem;
-        }
+        .brand-row { margin-bottom: 18px; }
       }
     </style>
   </head>
   <body>
-    <header class="site-header">
-      <nav class="nav">
-        <a class="brand" href="#top">
-          <img src="assets/impact_bridge_logo.png" alt="Project logo">
-          <span>Shireen El Sabea</span>
-        </a>
-        <div class="nav-links">
-          <a href="#dashboard">Dashboard</a>
-          <a href="#artifacts">Artifacts</a>
-          <a href="#carousel">Carousel</a>
-          <a href="#methodology">Methodology</a>
-          <a href="#repo">GitHub</a>
-        </div>
-      </nav>
-    </header>
-
-    <main id="top" class="page">
+    <main class="page">
       <section class="hero">
-        <div>
-          <p class="eyebrow">Responsible AI portfolio project</p>
-          <h1>Sudan Humanitarian AI Insights</h1>
-          <p class="lead">
-            A complete public project showing how humanitarian data, synthetic community feedback,
-            transparent scoring, and decision-support briefs can help teams discuss priorities with
-            more structure and accountability.
-          </p>
-          <p class="creator">Created by Shireen El Sabea.</p>
-          <div class="tag-row">
-            <span class="tag">Streamlit dashboard</span>
-            <span class="tag">Vercel project hub</span>
-            <span class="tag">LinkedIn carousel</span>
-            <span class="tag">Technical report</span>
-          </div>
-          <div class="button-row">
-            <a class="button primary" href="dashboard.html">Launch Dashboard</a>
-            <a class="button secondary" href="#artifacts">View Project Artifacts</a>
-            <a class="button secondary" href="https://github.com/Shireenelsabea" target="_blank" rel="noreferrer">Shireen GitHub</a>
-            <a class="button secondary" href="https://www.linkedin.com/in/shireenalsabea/" target="_blank" rel="noreferrer">LinkedIn Profile</a>
-          </div>
-        </div>
-        <aside class="hero-panel">
-          <div class="logo-tile">
-            <img src="assets/impact_bridge_logo.png" alt="Sudan Humanitarian AI Insights logo">
-          </div>
-          <div class="facts">
-            <div class="fact">
-              <strong>18 states</strong>
-              <p>Synthetic state-level priority data.</p>
+        <div class="hero-grid">
+          <div>
+            <div class="brand-row">
+              <img class="hero-logo" src="assets/impact_bridge_logo.png" alt="Humanitarian AI logo">
+              <div>
+                <p class="eyebrow">Public portfolio prototype</p>
+                <div class="brand-mini">Humanitarian needs analysis with transparent scoring</div>
+              </div>
             </div>
-            <div class="fact">
-              <strong>30 messages</strong>
-              <p>Privacy-safe feedback samples.</p>
-            </div>
-            <div class="fact">
-              <strong>0 PII</strong>
-              <p>No personal data in the demo.</p>
-            </div>
-            <div class="fact">
-              <strong>$0 stack</strong>
-              <p>Open-source local tooling.</p>
+            <h1>Sudan Humanitarian AI Insights</h1>
+            <p>
+              A privacy-safe dashboard demo that turns synthetic community feedback and public-context
+              assumptions into a hotspot watchlist, feedback triage, scenario extension, and downloadable
+              decision brief.
+            </p>
+            <p class="creator-line">
+              Created by <strong>Shireen El Sabea</strong> for humanitarian data analysis, responsible AI,
+              and social-impact collaboration.
+            </p>
+            <div class="chips">
+              <span class="chip">Synthetic demo data</span>
+              <span class="chip">No personal data</span>
+              <span class="chip">Rule-based text triage</span>
+              <span class="chip">Human validation required</span>
             </div>
           </div>
+        <aside class="guardrail-panel">
+          <h3>Demo Guardrails</h3>
+          <div class="guardrail-item"><span class="dot"></span><span>Designed for a LinkedIn case study, not live operational deployment.</span></div>
+          <div class="guardrail-item"><span class="dot"></span><span>State values and feedback rows are synthetic and should be read as scenario data.</span></div>
+          <div class="guardrail-item"><span class="dot"></span><span>Priority scores are transparent signals for review, not automated allocation decisions.</span></div>
+          <div class="guardrail-item"><span class="dot"></span><span>Public source anchors and ethics notes are documented in Methodology Notes.</span></div>
         </aside>
-      </section>
-
-      <section id="dashboard">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Interactive dashboard</p>
-            <h2>Operational Insight Prototype</h2>
-          </div>
-          <p>
-            The project now includes a fully interactive static dashboard for GitHub Pages,
-            plus the original Streamlit source code for local Python use or Streamlit Cloud deployment.
-          </p>
-        </div>
-        <div class="grid-3">
-          <article class="card accent">
-            <h3>Priority and Needs</h3>
-            <p>Ranks states with a transparent composite score using displacement volume, sector gaps, access constraints, protection alerts, and funding pressure.</p>
-          </article>
-          <article class="card accent">
-            <h3>Feedback Triage</h3>
-            <p>Classifies synthetic community feedback with a rule-based local text triage layer for sector, urgency, sentiment, and matched terms.</p>
-          </article>
-          <article class="card accent">
-            <h3>Decision Briefs</h3>
-            <p>Generates a downloadable hotspot brief with drivers, validation steps, recommended review actions, and ethical-use notes.</p>
-          </article>
-        </div>
-        <div class="grid-2" style="margin-top:16px">
-          <figure class="figure">
-            <img src="assets/figures/priority_hotspots.png" alt="Priority hotspots chart">
-          </figure>
-          <figure class="figure">
-            <img src="assets/figures/sector_pressure_heatmap.png" alt="Sector pressure heatmap">
-          </figure>
         </div>
       </section>
 
-      <section id="artifacts">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Whole project package</p>
-            <h2>Public Artifacts</h2>
-          </div>
-          <p>
-            Everything needed for a strong GitHub repository and LinkedIn case-study post is included:
-            source code, static project hub, carousel, technical report, and deployment notes.
-          </p>
+      <section class="contact-row" aria-label="Creator links">
+        <a class="button secondary" href="https://www.linkedin.com/in/shireenalsabea/">LinkedIn Profile</a>
+        <a class="button secondary" href="mailto:sabeashireen@gmail.com?subject=Collaboration%20on%20Humanitarian%20AI%20Dashboard">Reach Shireen for Collaboration</a>
+      </section>
+
+      <section class="controls">
+        <div class="panel">
+          <div class="control-title">Region</div>
+          <div id="regionFilters" class="check-grid"></div>
         </div>
-        <div class="grid-3">
-          <article class="card artifact">
-            <div class="metric">01</div>
-            <h3>Interactive Dashboard</h3>
-            <p>GitHub Pages dashboard with filters, charts, feedback triage, scenario views, and downloadable decision briefs.</p>
-            <a class="button secondary" href="dashboard.html">Launch Dashboard</a>
-          </article>
-          <article class="card artifact">
-            <div class="metric">02</div>
-            <h3>Technical Report</h3>
-            <p>PDF dossier explaining the case-study logic, workflow, visuals, ethics notes, and public context anchors.</p>
-            <a class="button secondary" href="downloads/sudan-humanitarian-ai-insights-report.pdf">Download Report</a>
-          </article>
-          <article class="card artifact">
-            <div class="metric">03</div>
-            <h3>LinkedIn Carousel</h3>
-            <p>A polished document carousel that introduces the problem, the AI workflow, and Shireen's collaboration CTA.</p>
-            <a class="button secondary" href="downloads/sudan-humanitarian-ai-insights-carousel.pdf">Download Carousel</a>
-          </article>
+        <div class="panel">
+          <div class="control-title">Priority Level</div>
+          <div id="levelFilters" class="check-grid"></div>
         </div>
       </section>
 
-      <section id="carousel">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">LinkedIn-ready media</p>
-            <h2>Carousel Preview</h2>
-          </div>
-          <p>
-            The carousel is designed for a document post. It gives the project a polished visual story before people open the dashboard or report.
-          </p>
-        </div>
-        <div class="carousel-preview">
-          <img src="assets/carousel/overview_all_slides.png" alt="All LinkedIn carousel slides overview">
-        </div>
-        <div class="slides" style="margin-top:16px">
-          <img src="assets/carousel/Slide_1.png" alt="Carousel slide 1">
-          <img src="assets/carousel/Slide_4.png" alt="Carousel slide 4">
-          <img src="assets/carousel/Slide_9.png" alt="Carousel slide 9">
-        </div>
-      </section>
+      <section class="scope-grid" id="scopeGrid"></section>
+      <section class="metrics" id="metricsGrid"></section>
 
-      <section id="methodology">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Responsible use</p>
-            <h2>Methodology and Guardrails</h2>
-          </div>
-          <p>
-            The project is framed as a public demonstration. It is not live operational intelligence and should not be used for real allocation decisions without verified field data.
-          </p>
-        </div>
+      <nav class="tabs" aria-label="Dashboard sections">
+        <button class="tab active" data-tab="priority">Priority & Needs</button>
+        <button class="tab" data-tab="feedback">Feedback Triage</button>
+        <button class="tab" data-tab="scenario">Scenario & Actions</button>
+        <button class="tab" data-tab="brief">Decision Brief</button>
+        <button class="tab" data-tab="methodology">Methodology Notes</button>
+      </nav>
+
+      <section id="priority" class="tab-pane active">
         <div class="grid-2">
-          <div class="method-list">
-            <div class="method-item">
-              <div class="step">1</div>
-              <div>
-                <h3>Synthetic scenario data</h3>
-                <p>State-level rows and feedback examples are synthetic, calibrated around public humanitarian reporting themes.</p>
-              </div>
-            </div>
-            <div class="method-item">
-              <div class="step">2</div>
-              <div>
-                <h3>Transparent scoring</h3>
-                <p>The priority score is explained through visible drivers rather than hidden automation.</p>
-              </div>
-            </div>
-            <div class="method-item">
-              <div class="step">3</div>
-              <div>
-                <h3>Human validation</h3>
-                <p>Outputs are designed to support field review, coordination, and planning, not replace judgment.</p>
-              </div>
-            </div>
+          <div class="panel">
+            <h2>Priority Geography</h2>
+            <p class="chart-note">Bubble size shows demo IDP caseload; color shows composite priority score.</p>
+            <div id="mapChart" class="chart"></div>
           </div>
-          <div class="card">
-            <h3>Public context anchors</h3>
-            <p>Useful sources for case-study framing:</p>
-            <div class="tag-row">
-              <a class="tag" href="https://dtm.iom.int/sudan" target="_blank" rel="noreferrer">IOM DTM Sudan</a>
-              <a class="tag" href="https://data.humdata.org/dataset/sdn-iom-dtm-from-api" target="_blank" rel="noreferrer">HDX IOM DTM</a>
-              <a class="tag" href="https://data.humdata.org/organization/ocha-sudan" target="_blank" rel="noreferrer">OCHA Sudan HDX</a>
-              <a class="tag" href="https://response.reliefweb.int/sudan" target="_blank" rel="noreferrer">ReliefWeb Sudan</a>
-            </div>
-            <div class="note" style="margin-top:18px">
-              No personal data is included. The dashboard is a decision-support prototype for discussion, not an operational deployment.
-            </div>
+          <div class="panel">
+            <h2>Top Watchlist</h2>
+            <p class="chart-note">Highest scoring states in the current filter selection.</p>
+            <div id="priorityBar" class="chart"></div>
+          </div>
+        </div>
+        <div class="panel" style="margin-top:14px">
+          <h2>Sector and Access Pressure</h2>
+          <p class="chart-note">Percent values are synthetic scenario indicators, not live assessments.</p>
+          <div id="heatmapChart" class="chart"></div>
+        </div>
+        <div class="panel" style="margin-top:14px">
+          <h2>State-Level Priority Table</h2>
+          <div class="table-wrap" id="stateTable"></div>
+        </div>
+      </section>
+
+      <section id="feedback" class="tab-pane">
+        <div class="metrics" id="feedbackMetrics"></div>
+        <div class="grid-2">
+          <div class="panel">
+            <h2>Predicted Sector Mix</h2>
+            <div id="sectorPie" class="chart"></div>
+            <h2>Predicted Urgency by Sector</h2>
+            <div id="urgencyBar" class="chart"></div>
+          </div>
+          <div class="panel">
+            <h2>Feedback Sample and Rule-Based Tags</h2>
+            <div class="table-wrap" id="feedbackTable"></div>
+          </div>
+        </div>
+        <div class="panel" style="margin-top:14px">
+          <h2>Test the Rule-Based Classifier</h2>
+          <textarea id="classifierInput">The water point is broken and children are sick after using unsafe water.</textarea>
+          <div class="metrics" id="classifierMetrics" style="margin:14px 0"></div>
+          <div class="panel" id="matchedTerms"></div>
+        </div>
+      </section>
+
+      <section id="scenario" class="tab-pane">
+        <div class="panel">
+          <h2>Displacement Trend with Linear Scenario Extension</h2>
+          <p class="chart-note">The extension is a simple linear scenario for demonstration, not a predictive model.</p>
+          <div id="forecastLine" class="chart"></div>
+        </div>
+        <div class="grid-2" style="margin-top:14px">
+          <div class="panel">
+            <h2>Monthly Feedback Pressure by Sector</h2>
+            <div id="sectorArea" class="chart"></div>
+          </div>
+          <div class="panel">
+            <h2>Review Queue</h2>
+            <div id="actionQueue"></div>
           </div>
         </div>
       </section>
 
-      <section id="repo">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">GitHub repository</p>
-            <h2>Prepared for Shireenelsabea</h2>
+      <section id="brief" class="tab-pane">
+        <div class="panel">
+          <h2>Decision-Support Brief</h2>
+          <p class="chart-note">Select a state to generate a downloadable brief from the same scoring model.</p>
+          <select id="briefSelect"></select>
+          <div class="grid-2" style="margin-top:14px">
+            <div class="panel" id="briefPanel"></div>
+            <div class="panel" id="validationPanel"></div>
           </div>
-          <p>
-            Recommended repository name: <strong>shireen-sudan-humanitarian-ai-insights</strong>. Keep it public so Vercel and Streamlit Community Cloud can deploy it for free.
-          </p>
-        </div>
-        <div class="repo-block">
-          <code>git remote add origin https://github.com/Shireenelsabea/shireen-sudan-humanitarian-ai-insights.git<br>
-git push -u origin main</code>
-        </div>
-        <div class="button-row">
-          <a class="button primary" href="https://github.com/Shireenelsabea" target="_blank" rel="noreferrer">Open Shireen GitHub</a>
-          <a class="button secondary" href="mailto:sabeashireen@gmail.com?subject=Collaboration%20on%20Humanitarian%20AI%20Dashboard">Reach Shireen</a>
+          <h2 style="margin-top:14px">Recommended Review Actions</h2>
+          <div class="grid-3" id="reviewActions"></div>
+          <h2 style="margin-top:14px">Feedback Signals From This Area</h2>
+          <div class="table-wrap" id="briefFeedback"></div>
+          <div class="actions">
+            <button class="button" id="downloadBrief">Download Selected Brief</button>
+          </div>
         </div>
       </section>
+
+      <section id="methodology" class="tab-pane">
+        <div class="grid-3">
+          <div class="panel"><div class="metric-label">Scenario caseload</div><div class="metric-value">10.8M</div><span class="metric-note">Demo context only</span></div>
+          <div class="panel"><div class="metric-label">Feedback privacy</div><div class="metric-value">0 PII</div><span class="metric-note">Synthetic text only</span></div>
+          <div class="panel"><div class="metric-label">External cost</div><div class="metric-value">$0</div><span class="metric-note">No paid model or BI license</span></div>
+        </div>
+        <div class="panel" style="margin-top:14px">
+          <h2>Methodology and Ethical Use</h2>
+          <p>
+            This prototype is designed as a public portfolio demonstration, not an operational deployment.
+            State-level values and feedback records are synthetic case-study data calibrated around public
+            humanitarian reporting themes. The dashboard does not contain personal data or live field assessments.
+          </p>
+          <div class="chips">
+            <a class="chip" href="https://dtm.iom.int/sudan">IOM DTM Sudan</a>
+            <a class="chip" href="https://data.humdata.org/dataset/sdn-iom-dtm-from-api">HDX IOM DTM</a>
+            <a class="chip" href="https://data.humdata.org/organization/ocha-sudan">OCHA Sudan HDX</a>
+            <a class="chip" href="https://response.reliefweb.int/sudan">ReliefWeb Sudan</a>
+          </div>
+        </div>
+        <div class="cta-strip">
+          <p>
+            <strong>Creator and collaboration:</strong>
+            This prototype was created by <strong>Shireen El Sabea</strong>. She is open to collaboration with
+            humanitarian organizations, data teams, and social-impact employers working on responsible AI for
+            needs analysis, community feedback, and decision-support workflows.
+          </p>
+          <div class="actions">
+            <a class="button secondary" href="https://www.linkedin.com/in/shireenalsabea/">Connect on LinkedIn</a>
+            <a class="button secondary" href="mailto:sabeashireen@gmail.com?subject=Collaboration%20on%20Humanitarian%20AI%20Dashboard">Reach Shireen for Collaboration</a>
+            <a class="button secondary" href="downloads/sudan-humanitarian-ai-insights-report.pdf">Technical Report</a>
+            <a class="button secondary" href="downloads/sudan-humanitarian-ai-insights-carousel.pdf">LinkedIn Carousel</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        Created by Shireen El Sabea. Responsible AI for humanitarian data, MEAL, and community feedback.
+      </footer>
     </main>
 
-    <footer class="site-footer">
-      <div class="page">
-        Created by Shireen El Sabea. Responsible AI for humanitarian data, needs analysis, and community feedback.
-      </div>
-    </footer>
+    <script>
+      const DATA = {"states":[{"state":"South Darfur","region":"Darfur","lat":11.78,"lon":24.9,"idps":1650000,"households":333000,"children_share":0.54,"food_insecurity_pct":0.94,"wash_gap_pct":0.81,"health_gap_pct":0.68,"access_constraint":0.91,"protection_alerts":128,"funding_gap_pct":0.73,"protection_pressure":1.0,"priority_score":89.7,"children_estimate":891000,"priority_level":"Critical"},{"state":"North Darfur","region":"Darfur","lat":15.58,"lon":25.33,"idps":1410000,"households":284000,"children_share":0.53,"food_insecurity_pct":0.93,"wash_gap_pct":0.77,"health_gap_pct":0.72,"access_constraint":0.88,"protection_alerts":116,"funding_gap_pct":0.71,"protection_pressure":0.8878504672897196,"priority_score":83.3,"children_estimate":747300,"priority_level":"Critical"},{"state":"Central Darfur","region":"Darfur","lat":12.9,"lon":23.47,"idps":790000,"households":159000,"children_share":0.55,"food_insecurity_pct":0.92,"wash_gap_pct":0.83,"health_gap_pct":0.69,"access_constraint":0.89,"protection_alerts":94,"funding_gap_pct":0.74,"protection_pressure":0.6822429906542056,"priority_score":70.1,"children_estimate":434500,"priority_level":"High"},{"state":"East Darfur","region":"Darfur","lat":11.46,"lon":26.13,"idps":540000,"households":109000,"children_share":0.52,"food_insecurity_pct":0.89,"wash_gap_pct":0.72,"health_gap_pct":0.61,"access_constraint":0.78,"protection_alerts":67,"funding_gap_pct":0.66,"protection_pressure":0.42990654205607476,"priority_score":58.0,"children_estimate":280800,"priority_level":"Elevated"},{"state":"West Darfur","region":"Darfur","lat":13.45,"lon":22.44,"idps":510000,"households":103000,"children_share":0.56,"food_insecurity_pct":0.91,"wash_gap_pct":0.8,"health_gap_pct":0.65,"access_constraint":0.86,"protection_alerts":89,"funding_gap_pct":0.7,"protection_pressure":0.6355140186915887,"priority_score":62.7,"children_estimate":285600,"priority_level":"High"},{"state":"Aj Jazirah","region":"Central","lat":14.9,"lon":33.4,"idps":710000,"households":143000,"children_share":0.51,"food_insecurity_pct":0.86,"wash_gap_pct":0.67,"health_gap_pct":0.57,"access_constraint":0.61,"protection_alerts":52,"funding_gap_pct":0.62,"protection_pressure":0.2897196261682243,"priority_score":55.7,"children_estimate":362100,"priority_level":"Elevated"},{"state":"White Nile","region":"Central","lat":13.2,"lon":32.7,"idps":630000,"households":127000,"children_share":0.52,"food_insecurity_pct":0.84,"wash_gap_pct":0.65,"health_gap_pct":0.53,"access_constraint":0.58,"protection_alerts":46,"funding_gap_pct":0.59,"protection_pressure":0.2336448598130841,"priority_score":51.9,"children_estimate":327600,"priority_level":"Elevated"},{"state":"River Nile","region":"Northern","lat":18.45,"lon":33.38,"idps":500000,"households":101000,"children_share":0.49,"food_insecurity_pct":0.79,"wash_gap_pct":0.58,"health_gap_pct":0.5,"access_constraint":0.46,"protection_alerts":31,"funding_gap_pct":0.51,"protection_pressure":0.09345794392523364,"priority_score":43.8,"children_estimate":245000,"priority_level":"Elevated"},{"state":"Northern","region":"Northern","lat":19.62,"lon":30.4,"idps":360000,"households":73000,"children_share":0.48,"food_insecurity_pct":0.76,"wash_gap_pct":0.54,"health_gap_pct":0.46,"access_constraint":0.42,"protection_alerts":22,"funding_gap_pct":0.48,"protection_pressure":0.009345794392523364,"priority_score":38.0,"children_estimate":172800,"priority_level":"Elevated"},{"state":"Gedaref","region":"Eastern","lat":14.04,"lon":35.38,"idps":480000,"households":97000,"children_share":0.5,"food_insecurity_pct":0.82,"wash_gap_pct":0.62,"health_gap_pct":0.55,"access_constraint":0.49,"protection_alerts":37,"funding_gap_pct":0.55,"protection_pressure":0.14953271028037382,"priority_score":46.4,"children_estimate":240000,"priority_level":"Elevated"},{"state":"Kassala","region":"Eastern","lat":15.46,"lon":36.4,"idps":390000,"households":79000,"children_share":0.51,"food_insecurity_pct":0.8,"wash_gap_pct":0.6,"health_gap_pct":0.52,"access_constraint":0.47,"protection_alerts":33,"funding_gap_pct":0.53,"protection_pressure":0.11214953271028037,"priority_score":42.9,"children_estimate":198900,"priority_level":"Elevated"},{"state":"Red Sea","region":"Eastern","lat":19.6,"lon":37.2,"idps":270000,"households":55000,"children_share":0.48,"food_insecurity_pct":0.77,"wash_gap_pct":0.56,"health_gap_pct":0.49,"access_constraint":0.44,"protection_alerts":21,"funding_gap_pct":0.5,"protection_pressure":0.0,"priority_score":37.5,"children_estimate":129600,"priority_level":"Elevated"},{"state":"Sennar","region":"Central","lat":13.55,"lon":33.6,"idps":410000,"households":83000,"children_share":0.5,"food_insecurity_pct":0.83,"wash_gap_pct":0.63,"health_gap_pct":0.54,"access_constraint":0.54,"protection_alerts":35,"funding_gap_pct":0.57,"protection_pressure":0.1308411214953271,"priority_score":45.8,"children_estimate":205000,"priority_level":"Elevated"},{"state":"Blue Nile","region":"Southern","lat":11.25,"lon":34.15,"idps":330000,"households":67000,"children_share":0.51,"food_insecurity_pct":0.84,"wash_gap_pct":0.66,"health_gap_pct":0.58,"access_constraint":0.63,"protection_alerts":44,"funding_gap_pct":0.6,"protection_pressure":0.21495327102803738,"priority_score":47.5,"children_estimate":168300,"priority_level":"Elevated"},{"state":"North Kordofan","region":"Kordofan","lat":13.63,"lon":30.4,"idps":610000,"households":123000,"children_share":0.52,"food_insecurity_pct":0.87,"wash_gap_pct":0.7,"health_gap_pct":0.6,"access_constraint":0.7,"protection_alerts":61,"funding_gap_pct":0.64,"protection_pressure":0.37383177570093457,"priority_score":56.8,"children_estimate":317200,"priority_level":"Elevated"},{"state":"South Kordofan","region":"Kordofan","lat":11.02,"lon":30.3,"idps":480000,"households":97000,"children_share":0.53,"food_insecurity_pct":0.88,"wash_gap_pct":0.71,"health_gap_pct":0.62,"access_constraint":0.76,"protection_alerts":70,"funding_gap_pct":0.66,"protection_pressure":0.45794392523364486,"priority_score":56.6,"children_estimate":254400,"priority_level":"Elevated"},{"state":"West Kordofan","region":"Kordofan","lat":11.19,"lon":29.53,"idps":370000,"households":75000,"children_share":0.52,"food_insecurity_pct":0.85,"wash_gap_pct":0.68,"health_gap_pct":0.57,"access_constraint":0.68,"protection_alerts":49,"funding_gap_pct":0.61,"protection_pressure":0.2616822429906542,"priority_score":49.8,"children_estimate":192400,"priority_level":"Elevated"},{"state":"Khartoum","region":"Central","lat":15.5,"lon":32.56,"idps":394382,"households":80000,"children_share":0.49,"food_insecurity_pct":0.81,"wash_gap_pct":0.59,"health_gap_pct":0.52,"access_constraint":0.65,"protection_alerts":58,"funding_gap_pct":0.58,"protection_pressure":0.34579439252336447,"priority_score":47.8,"children_estimate":193247,"priority_level":"Elevated"}],"trends":[{"month":"2024-01-01","total_idps":9180000,"feedback_messages":1120,"food_reports":418,"wash_reports":244,"health_reports":163,"shelter_reports":181,"protection_reports":114},{"month":"2024-02-01","total_idps":9365000,"feedback_messages":1250,"food_reports":462,"wash_reports":276,"health_reports":174,"shelter_reports":204,"protection_reports":134},{"month":"2024-03-01","total_idps":9580000,"feedback_messages":1390,"food_reports":512,"wash_reports":302,"health_reports":193,"shelter_reports":230,"protection_reports":153},{"month":"2024-04-01","total_idps":9820000,"feedback_messages":1565,"food_reports":588,"wash_reports":337,"health_reports":214,"shelter_reports":254,"protection_reports":172},{"month":"2024-05-01","total_idps":10070000,"feedback_messages":1710,"food_reports":651,"wash_reports":366,"health_reports":238,"shelter_reports":272,"protection_reports":183},{"month":"2024-06-01","total_idps":10290000,"feedback_messages":1885,"food_reports":722,"wash_reports":401,"health_reports":257,"shelter_reports":299,"protection_reports":206},{"month":"2024-07-01","total_idps":10540215,"feedback_messages":2210,"food_reports":802,"wash_reports":515,"health_reports":302,"shelter_reports":362,"protection_reports":229},{"month":"2024-08-01","total_idps":10834382,"feedback_messages":2520,"food_reports":910,"wash_reports":612,"health_reports":346,"shelter_reports":404,"protection_reports":248},{"month":"2024-09-01","total_idps":10910000,"feedback_messages":2595,"food_reports":944,"wash_reports":623,"health_reports":361,"shelter_reports":411,"protection_reports":256},{"month":"2024-10-01","total_idps":10980000,"feedback_messages":2680,"food_reports":978,"wash_reports":640,"health_reports":377,"shelter_reports":423,"protection_reports":262},{"month":"2024-11-01","total_idps":11035000,"feedback_messages":2765,"food_reports":1010,"wash_reports":661,"health_reports":391,"shelter_reports":433,"protection_reports":270},{"month":"2024-12-01","total_idps":11120000,"feedback_messages":2860,"food_reports":1051,"wash_reports":684,"health_reports":408,"shelter_reports":444,"protection_reports":273}],"feedback":[{"date":"2024-08-02","state":"South Darfur","channel":"SMS","message":"Families in the school shelter have no flour left and children are sleeping without meals.","sector":"Food Security","urgency":"Critical","population_group":"Children","ai_sector":"Food Security","ai_urgency":"Critical","confidence":0.92,"match":true},{"date":"2024-08-03","state":"North Darfur","channel":"WhatsApp","message":"The water point is broken again and people are using unsafe water from the valley.","sector":"WASH","urgency":"Critical","population_group":"General","ai_sector":"WASH","ai_urgency":"High","confidence":0.76,"match":true},{"date":"2024-08-03","state":"Central Darfur","channel":"Voice Note","message":"There are no lights near the latrines and women feel unsafe at night.","sector":"Protection","urgency":"High","population_group":"Women","ai_sector":"Protection","ai_urgency":"Critical","confidence":0.92,"match":true},{"date":"2024-08-04","state":"White Nile","channel":"SMS","message":"The clinic ran out of fever medicine and several children are sick.","sector":"Health","urgency":"Critical","population_group":"Children","ai_sector":"Health","ai_urgency":"Critical","confidence":0.96,"match":true},{"date":"2024-08-04","state":"Aj Jazirah","channel":"WhatsApp","message":"New arrivals need plastic sheets before the next rain.","sector":"Shelter","urgency":"High","population_group":"New arrivals","ai_sector":"Shelter","ai_urgency":"High","confidence":0.84,"match":true},{"date":"2024-08-05","state":"North Kordofan","channel":"SMS","message":"Food prices increased and the cash support is no longer enough for large families.","sector":"Food Security","urgency":"High","population_group":"Families","ai_sector":"Food Security","ai_urgency":"Critical","confidence":0.88,"match":true},{"date":"2024-08-06","state":"South Kordofan","channel":"Voice Note","message":"The road is blocked and the mobile health team has not reached the settlement.","sector":"Health","urgency":"High","population_group":"General","ai_sector":"Health","ai_urgency":"High","confidence":0.64,"match":true},{"date":"2024-08-07","state":"West Darfur","channel":"SMS","message":"Several children were separated during movement and families are asking for tracing support.","sector":"Protection","urgency":"Critical","population_group":"Children","ai_sector":"Protection","ai_urgency":"Critical","confidence":0.92,"match":true},{"date":"2024-08-08","state":"Gedaref","channel":"WhatsApp","message":"Soap and hygiene kits are finished in our block.","sector":"WASH","urgency":"High","population_group":"General","ai_sector":"WASH","ai_urgency":"High","confidence":0.72,"match":true},{"date":"2024-08-08","state":"Kassala","channel":"SMS","message":"Pregnant women need transport to the health center.","sector":"Health","urgency":"High","population_group":"Women","ai_sector":"Health","ai_urgency":"High","confidence":0.72,"match":true},{"date":"2024-08-09","state":"Blue Nile","channel":"WhatsApp","message":"The temporary shelters leak when it rains and blankets are wet.","sector":"Shelter","urgency":"High","population_group":"Families","ai_sector":"Shelter","ai_urgency":"Critical","confidence":0.96,"match":true},{"date":"2024-08-09","state":"Khartoum","channel":"SMS","message":"People are scared to cross the checkpoint to register for assistance.","sector":"Protection","urgency":"High","population_group":"General","ai_sector":"Protection","ai_urgency":"Medium","confidence":0.6,"match":true},{"date":"2024-08-10","state":"East Darfur","channel":"Voice Note","message":"We received sorghum but there is not enough cooking oil for the families.","sector":"Food Security","urgency":"Medium","population_group":"Families","ai_sector":"Food Security","ai_urgency":"High","confidence":0.76,"match":true},{"date":"2024-08-11","state":"Sennar","channel":"SMS","message":"The latrines are full and children are getting stomach pain.","sector":"WASH","urgency":"Critical","population_group":"Children","ai_sector":"WASH","ai_urgency":"Critical","confidence":0.88,"match":true},{"date":"2024-08-11","state":"River Nile","channel":"WhatsApp","message":"Older people need regular medicine for blood pressure.","sector":"Health","urgency":"Medium","population_group":"Older people","ai_sector":"Health","ai_urgency":"High","confidence":0.72,"match":true},{"date":"2024-08-12","state":"Northern","channel":"SMS","message":"The distribution list missed newly displaced households.","sector":"Registration","urgency":"Medium","population_group":"New arrivals","ai_sector":"Registration","ai_urgency":"High","confidence":0.72,"match":true},{"date":"2024-08-12","state":"Red Sea","channel":"WhatsApp","message":"Families need more shade materials because the heat is severe.","sector":"Shelter","urgency":"Medium","population_group":"Families","ai_sector":"Shelter","ai_urgency":"Medium","confidence":0.6,"match":true},{"date":"2024-08-13","state":"South Darfur","channel":"SMS","message":"There is harassment near the water queue and women ask for safer collection times.","sector":"Protection","urgency":"High","population_group":"Women","ai_sector":"Protection","ai_urgency":"High","confidence":0.72,"match":true},{"date":"2024-08-13","state":"North Darfur","channel":"Voice Note","message":"Milk for infants is not available in the market.","sector":"Food Security","urgency":"High","population_group":"Infants","ai_sector":"Food Security","ai_urgency":"Medium","confidence":0.6,"match":true},{"date":"2024-08-14","state":"Central Darfur","channel":"SMS","message":"The hand pump works only one hour a day and queues are very long.","sector":"WASH","urgency":"High","population_group":"General","ai_sector":"WASH","ai_urgency":"Medium","confidence":0.6,"match":true},{"date":"2024-08-14","state":"West Kordofan","channel":"WhatsApp","message":"The tent area is crowded and families need privacy partitions.","sector":"Shelter","urgency":"Medium","population_group":"Families","ai_sector":"Shelter","ai_urgency":"High","confidence":0.72,"match":true},{"date":"2024-08-15","state":"South Kordofan","channel":"SMS","message":"Malaria cases are increasing and there are not enough test kits.","sector":"Health","urgency":"Critical","population_group":"General","ai_sector":"Health","ai_urgency":"Critical","confidence":0.8,"match":true},{"date":"2024-08-15","state":"West Darfur","channel":"WhatsApp","message":"Women asked for separate latrines and better lighting.","sector":"Protection","urgency":"High","population_group":"Women","ai_sector":"WASH","ai_urgency":"High","confidence":0.72,"match":false},{"date":"2024-08-16","state":"Aj Jazirah","channel":"SMS","message":"Bread is available but families cannot afford it after losing income.","sector":"Food Security","urgency":"High","population_group":"Families","ai_sector":"Food Security","ai_urgency":"Medium","confidence":0.6,"match":true},{"date":"2024-08-16","state":"White Nile","channel":"Voice Note","message":"The water truck did not arrive yesterday and people are sharing from one tank.","sector":"WASH","urgency":"High","population_group":"General","ai_sector":"WASH","ai_urgency":"High","confidence":0.72,"match":true},{"date":"2024-08-17","state":"North Kordofan","channel":"SMS","message":"Children have no safe space and spend the day near the road.","sector":"Child Protection","urgency":"High","population_group":"Children","ai_sector":"Protection","ai_urgency":"Critical","confidence":0.8,"match":true},{"date":"2024-08-18","state":"Gedaref","channel":"WhatsApp","message":"A new group arrived last night and needs emergency food rations.","sector":"Food Security","urgency":"Critical","population_group":"New arrivals","ai_sector":"Food Security","ai_urgency":"High","confidence":0.84,"match":true},{"date":"2024-08-18","state":"Kassala","channel":"SMS","message":"Many families lost documents during flight and need registration help.","sector":"Registration","urgency":"Medium","population_group":"Families","ai_sector":"Registration","ai_urgency":"High","confidence":0.72,"match":true},{"date":"2024-08-19","state":"Blue Nile","channel":"Voice Note","message":"Flood water damaged shelters and people are sleeping outside.","sector":"Shelter","urgency":"Critical","population_group":"Families","ai_sector":"Shelter","ai_urgency":"Critical","confidence":0.96,"match":true},{"date":"2024-08-20","state":"Khartoum","channel":"SMS","message":"The health post has no clean delivery supplies.","sector":"Health","urgency":"Critical","population_group":"Women","ai_sector":"Health","ai_urgency":"High","confidence":0.76,"match":true}],"forecast":[{"month":"2024-01-01","total_idps":9180000,"series":"Observed"},{"month":"2024-02-01","total_idps":9365000,"series":"Observed"},{"month":"2024-03-01","total_idps":9580000,"series":"Observed"},{"month":"2024-04-01","total_idps":9820000,"series":"Observed"},{"month":"2024-05-01","total_idps":10070000,"series":"Observed"},{"month":"2024-06-01","total_idps":10290000,"series":"Observed"},{"month":"2024-07-01","total_idps":10540215,"series":"Observed"},{"month":"2024-08-01","total_idps":10834382,"series":"Observed"},{"month":"2024-09-01","total_idps":10910000,"series":"Observed"},{"month":"2024-10-01","total_idps":10980000,"series":"Observed"},{"month":"2024-11-01","total_idps":11035000,"series":"Observed"},{"month":"2024-12-01","total_idps":11120000,"series":"Observed"},{"month":"2025-01-01","total_idps":11541369,"series":"Linear scenario extension"},{"month":"2025-02-01","total_idps":11730751,"series":"Linear scenario extension"},{"month":"2025-03-01","total_idps":11920133,"series":"Linear scenario extension"}],"sectorKeywords":{"Food Security":["food","meal","meals","flour","sorghum","bread","ration","rations","hungry","milk","cash","prices","oil"],"WASH":["water","latrine","latrines","toilet","soap","hygiene","sanitation","hand pump","tank","unsafe water","stomach"],"Health":["clinic","medicine","fever","malaria","health","doctor","pregnant","pregnancy","delivery","test kits","sick","blood pressure"],"Shelter":["shelter","shelters","tent","plastic sheet","sheets","rain","flood","blanket","blankets","shade","sleeping outside","privacy"],"Protection":["unsafe","safety","harassment","women","children","separated","tracing","lights","lighting","checkpoint","violence","safe space"],"Registration":["register","registration","documents","list","missed","new arrivals"]},"criticalTerms":["no ","not enough","unsafe","sick","children","separated","blocked","flood","malaria","ran out","sleeping outside"],"recommendations":{"idp_pressure":"Use caseload size to frame the immediate ask and split support by settlement capacity.","food_insecurity_pct":"Preposition food rations and review cash values against local prices.","wash_gap_pct":"Deploy a mobile WASH team for water points, hygiene kits, and latrine safety.","health_gap_pct":"Schedule a mobile clinic rotation with essential medicines and referral support.","access_constraint":"Escalate access planning and prepare remote support through local partners.","protection_alerts":"Trigger protection case review and strengthen safe reporting channels.","funding_gap_pct":"Prepare donor note with caseload, gap, and immediate operational ask."},"driverLabels":{"idp_pressure":"IDP volume","food_insecurity_pct":"Food security","wash_gap_pct":"WASH","health_gap_pct":"Health","access_constraint":"Access","protection_alerts":"Protection","funding_gap_pct":"Funding"},"validationSteps":{"Critical":["Validate the hotspot with field partners within 24-48 hours.","Check whether protection, WASH, food, and health teams see the same pattern.","Prepare a short donor or coordination note with caseload, driver, and immediate ask."],"High":["Schedule partner validation during the next coordination cycle.","Preposition supplies or service capacity if access conditions are stable.","Monitor feedback volume and sector pressure weekly."],"Elevated":["Keep the area on the watchlist and preserve a baseline for comparison.","Look for sudden increases in feedback, access constraints, or protection alerts.","Use community feedback channels to verify whether the risk is changing."]}};
+      const COLORS = {
+        teal: "#1f7a8c",
+        amber: "#c58a20",
+        red: "#b42318",
+        blue: "#315a8a",
+        muted: "#5b6675",
+        line: "#d8dee6"
+      };
+      const priorityColors = { Elevated: COLORS.teal, High: COLORS.amber, Critical: COLORS.red };
+      const state = {
+        regions: [...new Set(DATA.states.map(d => d.region))].sort(),
+        levels: ["Critical", "High", "Elevated"],
+        activeRegions: new Set(),
+        activeLevels: new Set(["Critical", "High", "Elevated"])
+      };
+      state.regions.forEach(region => state.activeRegions.add(region));
+
+      function formatInt(value) {
+        const rounded = Math.round(value);
+        if (rounded >= 1000000) return (rounded / 1000000).toFixed(1) + "M";
+        if (rounded >= 1000) return Math.round(rounded / 1000) + "K";
+        return rounded.toLocaleString();
+      }
+      function pct(value) { return Math.round(value * 100) + "%"; }
+      function filteredStates() {
+        return DATA.states.filter(d => state.activeRegions.has(d.region) && state.activeLevels.has(d.priority_level));
+      }
+      function classifyFeedback(text) {
+        const lowered = " " + text.toLowerCase() + " ";
+        const scores = {};
+        Object.entries(DATA.sectorKeywords).forEach(([sector, keywords]) => {
+          scores[sector] = keywords.filter(keyword => lowered.includes(keyword)).length;
+        });
+        let topSector = Object.keys(scores).sort((a, b) => scores[b] - scores[a])[0];
+        const topScore = scores[topSector];
+        if (topScore === 0) topSector = "Unclassified";
+        const criticalHits = DATA.criticalTerms.filter(term => lowered.includes(term)).length;
+        const urgencyPoints = topScore + criticalHits;
+        const urgency = urgencyPoints >= 4 ? "Critical" : urgencyPoints >= 2 ? "High" : "Medium";
+        const sentiment = urgency === "Critical" ? "Distress signal" : urgency === "High" ? "Negative" : "Needs follow-up";
+        const confidence = Math.min(0.96, 0.48 + topScore * 0.12 + criticalHits * 0.04);
+        const matchedTerms = (DATA.sectorKeywords[topSector] || []).filter(keyword => lowered.includes(keyword)).slice(0, 5);
+        return { sector: topSector, urgency, sentiment, confidence, matchedTerms };
+      }
+      function driverFor(row) {
+        const values = {
+          food_insecurity_pct: row.food_insecurity_pct,
+          wash_gap_pct: row.wash_gap_pct,
+          health_gap_pct: row.health_gap_pct,
+          access_constraint: row.access_constraint,
+          protection_alerts: row.protection_pressure,
+          funding_gap_pct: row.funding_gap_pct
+        };
+        return Object.keys(values).sort((a, b) => values[b] - values[a])[0];
+      }
+      function hotspotDrivers(row) {
+        const items = [
+          { key: "idp_pressure", label: DATA.driverLabels.idp_pressure, score: Math.min(row.idps / 1600000, 1), display: formatInt(row.idps) + " IDPs" },
+          { key: "food_insecurity_pct", label: DATA.driverLabels.food_insecurity_pct, score: row.food_insecurity_pct, display: pct(row.food_insecurity_pct) },
+          { key: "wash_gap_pct", label: DATA.driverLabels.wash_gap_pct, score: row.wash_gap_pct, display: pct(row.wash_gap_pct) },
+          { key: "health_gap_pct", label: DATA.driverLabels.health_gap_pct, score: row.health_gap_pct, display: pct(row.health_gap_pct) },
+          { key: "access_constraint", label: DATA.driverLabels.access_constraint, score: row.access_constraint, display: pct(row.access_constraint) },
+          { key: "protection_alerts", label: DATA.driverLabels.protection_alerts, score: row.protection_pressure, display: row.protection_alerts + " alerts" },
+          { key: "funding_gap_pct", label: DATA.driverLabels.funding_gap_pct, score: row.funding_gap_pct, display: pct(row.funding_gap_pct) }
+        ];
+        return items.sort((a, b) => b.score - a.score);
+      }
+      function card(label, value, note) {
+        return `<div class="panel"><div class="metric-label">${label}</div><div class="metric-value">${value}</div><span class="metric-note">${note}</span></div>`;
+      }
+      function scopeCard(value, label) {
+        return `<div class="scope-item"><div class="scope-value">${value}</div><div class="scope-label">${label}</div></div>`;
+      }
+      function renderFilters() {
+        document.getElementById("regionFilters").innerHTML = state.regions.map(region => `
+          <label class="check"><input type="checkbox" data-region="${region}" checked> ${region}</label>
+        `).join("");
+        document.getElementById("levelFilters").innerHTML = state.levels.map(level => `
+          <label class="check"><input type="checkbox" data-level="${level}" checked> ${level}</label>
+        `).join("");
+        document.querySelectorAll("[data-region]").forEach(input => input.addEventListener("change", e => {
+          e.target.checked ? state.activeRegions.add(e.target.dataset.region) : state.activeRegions.delete(e.target.dataset.region);
+          renderAll();
+        }));
+        document.querySelectorAll("[data-level]").forEach(input => input.addEventListener("change", e => {
+          e.target.checked ? state.activeLevels.add(e.target.dataset.level) : state.activeLevels.delete(e.target.dataset.level);
+          renderAll();
+        }));
+      }
+      function renderScope() {
+        const latest = new Date(DATA.trends[DATA.trends.length - 1].month).toLocaleString("en", { month: "short", year: "numeric" });
+        document.getElementById("scopeGrid").innerHTML = [
+          scopeCard("18 states", "Synthetic state-level rows used for the priority model."),
+          scopeCard("30 messages", "Synthetic feedback samples for local text triage."),
+          scopeCard(latest, "Last observed month before the simple scenario extension."),
+          scopeCard("Human review", "The dashboard supports validation, coordination, and planning.")
+        ].join("");
+      }
+      function renderMetrics(rows) {
+        if (!rows.length) {
+          document.getElementById("metricsGrid").innerHTML = card("No matches", "0", "Adjust filters");
+          return;
+        }
+        const total = rows.reduce((sum, row) => sum + row.idps, 0);
+        const children = rows.reduce((sum, row) => sum + row.children_estimate, 0);
+        const avg = rows.reduce((sum, row) => sum + row.priority_score, 0) / rows.length;
+        const critical = rows.filter(row => row.priority_level === "Critical").length;
+        const top = [...rows].sort((a, b) => b.priority_score - a.priority_score)[0];
+        document.getElementById("metricsGrid").innerHTML = [
+          card("Demo IDP caseload", formatInt(total), rows.length + " states in scope"),
+          card("Estimated children", formatInt(children), Math.round(children / total * 100) + "% derived share"),
+          card("Mean priority score", avg.toFixed(1) + "/100", "Composite model"),
+          card("Critical watchlist", critical, "Review first"),
+          card("Highest ranked state", top.state, "By demo priority score")
+        ].join("");
+      }
+      function plotPriority(rows) {
+        const layoutBase = {
+          margin: { l: 10, r: 10, t: 10, b: 20 },
+          paper_bgcolor: "rgba(0,0,0,0)",
+          plot_bgcolor: "rgba(0,0,0,0)",
+          font: { color: "#17202a" }
+        };
+        Plotly.newPlot("mapChart", [{
+          type: "scatter",
+          mode: "markers+text",
+          x: rows.map(d => d.lon),
+          y: rows.map(d => d.lat),
+          text: rows.map(d => d.state),
+          textposition: "top center",
+          marker: {
+            size: rows.map(d => Math.max(10, Math.sqrt(d.idps) / 35)),
+            color: rows.map(d => d.priority_score),
+            colorscale: [[0, COLORS.teal], [0.55, COLORS.amber], [1, COLORS.red]],
+            showscale: true,
+            colorbar: { title: "Priority" },
+            line: { color: "#fff", width: 1 }
+          },
+          hovertemplate: "%{text}<br>IDPs: %{customdata[0]:,}<br>Score: %{customdata[1]}<extra></extra>",
+          customdata: rows.map(d => [d.idps, d.priority_score])
+        }], {
+          ...layoutBase,
+          height: 430,
+          xaxis: { title: "Longitude", range: [20, 39], gridcolor: "#e6edf3" },
+          yaxis: { title: "Latitude", range: [7, 23], gridcolor: "#e6edf3" }
+        }, { responsive: true, displayModeBar: false });
+
+        const top = [...rows].sort((a, b) => a.priority_score - b.priority_score).slice(-10);
+        Plotly.newPlot("priorityBar", [{
+          type: "bar",
+          orientation: "h",
+          x: top.map(d => d.priority_score),
+          y: top.map(d => d.state),
+          marker: { color: top.map(d => priorityColors[d.priority_level]) },
+          text: top.map(d => d.priority_score),
+          textposition: "outside",
+          hovertemplate: "%{y}<br>Score: %{x}<extra></extra>"
+        }], {
+          ...layoutBase,
+          height: 430,
+          xaxis: { range: [0, 100], title: "Priority score", gridcolor: "#e6edf3" },
+          yaxis: { automargin: true }
+        }, { responsive: true, displayModeBar: false });
+
+        const heatRows = [...rows].sort((a, b) => b.priority_score - a.priority_score).slice(0, 10);
+        const columns = ["food_insecurity_pct", "wash_gap_pct", "health_gap_pct", "access_constraint", "funding_gap_pct"];
+        Plotly.newPlot("heatmapChart", [{
+          type: "heatmap",
+          z: heatRows.map(row => columns.map(col => Math.round(row[col] * 100))),
+          x: columns.map(col => DATA.driverLabels[col]),
+          y: heatRows.map(row => row.state),
+          colorscale: [[0, "#e6eef2"], [0.55, COLORS.amber], [1, COLORS.red]],
+          colorbar: { title: "Gap" },
+          hovertemplate: "%{y}<br>%{x}: %{z}%<extra></extra>"
+        }], { ...layoutBase, height: 420, yaxis: { automargin: true } }, { responsive: true, displayModeBar: false });
+      }
+      function renderStateTable(rows) {
+        const sorted = [...rows].sort((a, b) => b.priority_score - a.priority_score);
+        document.getElementById("stateTable").innerHTML = `<table><thead><tr>
+          <th>State</th><th>Region</th><th>Priority</th><th>Score</th><th>IDPs</th><th>Children</th><th>Food</th><th>WASH</th><th>Health</th><th>Access</th>
+        </tr></thead><tbody>${sorted.map(row => `<tr>
+          <td>${row.state}</td><td>${row.region}</td><td>${row.priority_level}</td><td>${row.priority_score}</td>
+          <td>${formatInt(row.idps)}</td><td>${formatInt(row.children_estimate)}</td>
+          <td>${pct(row.food_insecurity_pct)}</td><td>${pct(row.wash_gap_pct)}</td><td>${pct(row.health_gap_pct)}</td><td>${pct(row.access_constraint)}</td>
+        </tr>`).join("")}</tbody></table>`;
+      }
+      function renderFeedback() {
+        const matchRate = DATA.feedback.filter(row => row.match).length / DATA.feedback.length;
+        const critical = DATA.feedback.filter(row => row.ai_urgency === "Critical").length;
+        document.getElementById("feedbackMetrics").innerHTML = [
+          card("Feedback records", DATA.feedback.length, "Synthetic sample"),
+          card("Rule match rate", Math.round(matchRate * 100) + "%", "Against demo labels"),
+          card("Critical signals", critical, "Predicted urgency"),
+          card("States represented", new Set(DATA.feedback.map(row => row.state)).size, "Across Sudan")
+        ].join("");
+        const sectorCounts = Object.entries(DATA.feedback.reduce((acc, row) => {
+          acc[row.ai_sector] = (acc[row.ai_sector] || 0) + 1;
+          return acc;
+        }, {}));
+        Plotly.newPlot("sectorPie", [{
+          type: "pie",
+          labels: sectorCounts.map(([key]) => key),
+          values: sectorCounts.map(([, value]) => value),
+          hole: 0.52,
+          marker: { colors: [COLORS.teal, COLORS.amber, COLORS.red, COLORS.blue, "#6b7280", "#7c5c2e"] }
+        }], { height: 330, margin: { l: 10, r: 10, t: 10, b: 10 }, paper_bgcolor: "rgba(0,0,0,0)" }, { responsive: true, displayModeBar: false });
+        const sectors = [...new Set(DATA.feedback.map(row => row.ai_sector))];
+        const urgencies = ["Critical", "High", "Medium"];
+        Plotly.newPlot("urgencyBar", urgencies.map(urgency => ({
+          type: "bar",
+          name: urgency,
+          x: sectors,
+          y: sectors.map(sector => DATA.feedback.filter(row => row.ai_sector === sector && row.ai_urgency === urgency).length),
+          marker: { color: urgency === "Critical" ? COLORS.red : urgency === "High" ? COLORS.amber : COLORS.teal }
+        })), {
+          barmode: "stack",
+          height: 330,
+          margin: { l: 40, r: 10, t: 10, b: 90 },
+          paper_bgcolor: "rgba(0,0,0,0)",
+          plot_bgcolor: "rgba(0,0,0,0)",
+          yaxis: { title: "Records", gridcolor: "#e6edf3" }
+        }, { responsive: true, displayModeBar: false });
+        const rows = [...DATA.feedback].sort((a, b) => b.date.localeCompare(a.date));
+        document.getElementById("feedbackTable").innerHTML = `<table><thead><tr><th>Date</th><th>State</th><th>Message</th><th>Predicted sector</th><th>Urgency</th><th>Confidence</th></tr></thead><tbody>${rows.map(row => `<tr><td>${row.date}</td><td>${row.state}</td><td>${row.message}</td><td>${row.ai_sector}</td><td>${row.ai_urgency}</td><td>${Math.round(row.confidence * 100)}%</td></tr>`).join("")}</tbody></table>`;
+        renderClassifier();
+      }
+      function renderClassifier() {
+        const result = classifyFeedback(document.getElementById("classifierInput").value);
+        document.getElementById("classifierMetrics").innerHTML = [
+          card("Sector", result.sector, "Rule output"),
+          card("Urgency", result.urgency, "Triage level"),
+          card("Sentiment", result.sentiment, "Signal"),
+          card("Confidence", Math.round(result.confidence * 100) + "%", "Rule confidence")
+        ].join("");
+        document.getElementById("matchedTerms").innerHTML = `<div class="metric-label">Matched terms</div><p>${result.matchedTerms.length ? result.matchedTerms.join(", ") : "No strong sector terms found"}</p>`;
+      }
+      function renderScenario(rows) {
+        const series = [...new Set(DATA.forecast.map(row => row.series))];
+        Plotly.newPlot("forecastLine", series.map(name => {
+          const vals = DATA.forecast.filter(row => row.series === name);
+          return {
+            type: "scatter",
+            mode: "lines+markers",
+            name,
+            x: vals.map(row => row.month),
+            y: vals.map(row => row.total_idps),
+            line: { color: name === "Observed" ? COLORS.teal : COLORS.red, width: 3 }
+          };
+        }), {
+          height: 380,
+          margin: { l: 60, r: 10, t: 10, b: 50 },
+          paper_bgcolor: "rgba(0,0,0,0)",
+          plot_bgcolor: "rgba(0,0,0,0)",
+          yaxis: { title: "Estimated IDPs", gridcolor: "#e6edf3" }
+        }, { responsive: true, displayModeBar: false });
+        const sectorColumns = ["food_reports", "wash_reports", "health_reports", "shelter_reports", "protection_reports"];
+        Plotly.newPlot("sectorArea", sectorColumns.map((col, idx) => ({
+          type: "scatter",
+          mode: "lines",
+          stackgroup: "one",
+          name: col.replace("_reports", "").replace("_", " ").replace(/\b\w/g, c => c.toUpperCase()),
+          x: DATA.trends.map(row => row.month),
+          y: DATA.trends.map(row => row[col]),
+          line: { color: [COLORS.teal, COLORS.blue, COLORS.amber, "#7c5c2e", COLORS.red][idx] }
+        })), {
+          height: 430,
+          margin: { l: 50, r: 10, t: 10, b: 50 },
+          paper_bgcolor: "rgba(0,0,0,0)",
+          plot_bgcolor: "rgba(0,0,0,0)",
+          yaxis: { title: "Monthly records", gridcolor: "#e6edf3" }
+        }, { responsive: true, displayModeBar: false });
+        const queue = [...rows].sort((a, b) => b.priority_score - a.priority_score).slice(0, 6);
+        document.getElementById("actionQueue").innerHTML = queue.map(row => {
+          const key = driverFor(row);
+          return `<div class="panel" style="margin-bottom:10px;border-left:5px solid ${priorityColors[row.priority_level]}">
+            <strong>${row.state}</strong> - ${row.priority_level} - Score ${row.priority_score}
+            <p>Driver: ${DATA.driverLabels[key]} | Caseload: ${formatInt(row.idps)}</p>
+            <p>${DATA.recommendations[key]}</p>
+          </div>`;
+        }).join("");
+      }
+      function buildBrief(row) {
+        const drivers = hotspotDrivers(row);
+        const related = DATA.feedback.filter(item => item.state === row.state);
+        const lines = [
+          `Decision-Support Brief: ${row.state}`,
+          `Priority: ${row.priority_level} | Score: ${row.priority_score}/100`,
+          `Estimated IDPs: ${formatInt(row.idps)} | Children estimate: ${formatInt(row.children_estimate)}`,
+          "",
+          "Why this hotspot matters:",
+          "The dashboard ranks this area using displacement volume, sector gaps, access constraints, protection alerts, and funding pressure.",
+          "Top drivers: " + drivers.slice(0, 4).map(driver => `${driver.label} (${driver.display})`).join("; "),
+          "",
+          "Recommended moves:",
+          ...drivers.slice(0, 3).map(driver => "- " + DATA.recommendations[driver.key]),
+          "",
+          "Feedback signals:",
+          related.length ? related.map(item => `- ${item.date} | ${item.ai_sector} | ${item.ai_urgency} | ${item.message}`).join("\n") : "No synthetic feedback records attached.",
+          "",
+          "Field validation steps:",
+          ...DATA.validationSteps[row.priority_level].map(step => "- " + step),
+          "",
+          "Ethical note:",
+          "This is a decision-support brief. It should guide human review, not replace field validation or community accountability."
+        ];
+        return lines.join("\n");
+      }
+      function renderBriefOptions(rows) {
+        const select = document.getElementById("briefSelect");
+        const sorted = [...rows].sort((a, b) => b.priority_score - a.priority_score);
+        select.innerHTML = sorted.map(row => `<option value="${row.state}">${row.state}</option>`).join("");
+        select.onchange = () => renderBrief();
+        renderBrief();
+      }
+      function renderBrief() {
+        const selected = document.getElementById("briefSelect").value || DATA.states[0].state;
+        const row = DATA.states.find(item => item.state === selected);
+        const drivers = hotspotDrivers(row);
+        const driverHtml = drivers.slice(0, 5).map(driver => `<span class="driver-pill">${driver.label}: ${driver.display}</span>`).join("");
+        document.getElementById("briefPanel").innerHTML = `<div class="brief-title">${row.state}</div><p>${row.state} is marked as ${row.priority_level} because the composite score combines large displacement volume, sector pressure, protection alerts, access constraints, and funding gaps.</p><div class="driver-row">${driverHtml}</div><h3>Recommended response posture</h3><p>Treat this hotspot as a decision-support signal. Use it to prioritize field validation, coordination, and resource planning before any final allocation decision.</p>`;
+        document.getElementById("validationPanel").innerHTML = `<h3>Validation Steps</h3>${DATA.validationSteps[row.priority_level].map(step => `<div class="panel" style="margin-bottom:8px;border-left:4px solid var(--teal)">${step}</div>`).join("")}`;
+        document.getElementById("reviewActions").innerHTML = drivers.slice(0, 3).map(driver => `<div class="panel"><div class="metric-label">${driver.label}</div><p>${DATA.recommendations[driver.key]}</p></div>`).join("");
+        const related = DATA.feedback.filter(item => item.state === row.state).sort((a, b) => b.date.localeCompare(a.date));
+        document.getElementById("briefFeedback").innerHTML = related.length ? `<table><thead><tr><th>Date</th><th>Channel</th><th>Message</th><th>Sector</th><th>Urgency</th></tr></thead><tbody>${related.map(item => `<tr><td>${item.date}</td><td>${item.channel}</td><td>${item.message}</td><td>${item.ai_sector}</td><td>${item.ai_urgency}</td></tr>`).join("")}</tbody></table>` : `<p>No synthetic feedback records are attached to this state in the current demo sample.</p>`;
+      }
+      function renderAll() {
+        const rows = filteredStates();
+        renderScope();
+        renderMetrics(rows);
+        plotPriority(rows);
+        renderStateTable(rows);
+        renderFeedback();
+        renderScenario(rows);
+        renderBriefOptions(rows.length ? rows : DATA.states);
+      }
+      document.querySelectorAll(".tab").forEach(button => {
+        button.addEventListener("click", () => {
+          document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+          document.querySelectorAll(".tab-pane").forEach(pane => pane.classList.remove("active"));
+          button.classList.add("active");
+          document.getElementById(button.dataset.tab).classList.add("active");
+          window.dispatchEvent(new Event("resize"));
+        });
+      });
+      document.getElementById("classifierInput").addEventListener("input", renderClassifier);
+      document.getElementById("downloadBrief").addEventListener("click", () => {
+        const selected = document.getElementById("briefSelect").value || DATA.states[0].state;
+        const row = DATA.states.find(item => item.state === selected);
+        const blob = new Blob([buildBrief(row)], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = selected.toLowerCase().replaceAll(" ", "_") + "_decision_brief.txt";
+        link.click();
+        URL.revokeObjectURL(url);
+      });
+      renderFilters();
+      renderAll();
+    </script>
   </body>
 </html>

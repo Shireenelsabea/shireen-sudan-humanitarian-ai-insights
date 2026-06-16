@@ -10,6 +10,9 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data"
 DOCS_DIR = ROOT / "docs"
+CREATOR_NAME = "Shireen El Sabea"
+CREATOR_LINKEDIN = "https://www.linkedin.com/in/shireenalsabea/"
+CREATOR_EMAIL = "sabeashireen@gmail.com"
 
 
 SECTOR_KEYWORDS = {
@@ -282,8 +285,8 @@ def build_html() -> str:
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Interactive Dashboard | Sudan Humanitarian AI Insights</title>
-    <meta name="description" content="Interactive GitHub Pages dashboard for Shireen Al Sabea's Sudan Humanitarian AI Insights project.">
+    <title>Sudan Humanitarian AI Insights</title>
+    <meta name="description" content="Interactive GitHub Pages dashboard for Shireen El Sabea's Sudan Humanitarian AI Insights project.">
     <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
     <style>
       :root {{
@@ -306,99 +309,68 @@ def build_html() -> str:
         background: var(--canvas);
       }}
       a {{ color: inherit; }}
-      .topbar {{
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        background: rgba(255,255,255,0.95);
-        border-bottom: 1px solid var(--line);
-        backdrop-filter: blur(12px);
-      }}
-      .nav {{
-        width: min(1380px, calc(100% - 28px));
-        margin: 0 auto;
-        min-height: 64px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 16px;
-      }}
-      .brand {{
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 850;
-        text-decoration: none;
-      }}
-      .brand img {{
-        width: 38px;
-        height: 38px;
-        object-fit: cover;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #fff;
-      }}
-      .nav-links {{
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        color: var(--muted);
-        font-weight: 750;
-        font-size: 0.92rem;
-      }}
-      .nav-links a {{ text-decoration: none; }}
       .page {{
-        width: min(1380px, calc(100% - 28px));
+        width: min(1280px, calc(100% - 32px));
         margin: 0 auto;
-        padding: 24px 0 48px;
+        padding: 32px 0 48px;
       }}
       .hero {{
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--paper);
+        padding: 19px 20px;
+        margin-bottom: 16px;
+        box-shadow: 0 14px 34px rgba(23,32,42,0.05);
+      }}
+      .hero-grid {{
         display: grid;
-        grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+        grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
         gap: 18px;
         align-items: stretch;
-        margin-bottom: 18px;
       }}
-      .panel {{
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--paper);
-        padding: 18px;
-        box-shadow: 0 10px 28px rgba(23,32,42,0.05);
-      }}
-      .hero-main {{
+      .brand-row {{
         display: flex;
-        gap: 14px;
-        align-items: flex-start;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 28px;
       }}
       .hero-logo {{
-        width: 64px;
-        height: 64px;
-        border-radius: 12px;
+        width: 58px;
+        height: 58px;
+        border-radius: 10px;
         border: 1px solid var(--line);
         object-fit: cover;
         background: #fff;
         flex: 0 0 auto;
       }}
+      .brand-mini {{
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 700;
+      }}
       .eyebrow {{
-        margin: 0 0 8px;
+        margin: 0 0 4px;
         color: var(--green);
-        font-size: 0.8rem;
-        font-weight: 900;
+        font-size: 0.78rem;
+        font-weight: 800;
         text-transform: uppercase;
       }}
       h1, h2, h3 {{ margin: 0; letter-spacing: 0; }}
       h1 {{
-        font-size: clamp(2rem, 4vw, 3.6rem);
-        line-height: 1;
-        margin-bottom: 12px;
+        font-size: clamp(1.9rem, 3.2vw, 2.75rem);
+        line-height: 1.08;
+        margin-bottom: 20px;
       }}
-      h2 {{ font-size: clamp(1.5rem, 3vw, 2.2rem); margin-bottom: 8px; }}
+      h2 {{ font-size: clamp(1.25rem, 2.2vw, 1.65rem); margin-bottom: 10px; }}
       h3 {{ font-size: 1.05rem; margin-bottom: 8px; }}
       p {{
         color: var(--muted);
         line-height: 1.55;
         margin: 0;
+      }}
+      .creator-line {{
+        color: var(--muted);
+        margin-top: 10px;
       }}
       .chips {{
         display: flex;
@@ -412,8 +384,15 @@ def build_html() -> str:
         background: #f8fafc;
         color: var(--ink);
         font-size: 0.84rem;
-        font-weight: 800;
+        font-weight: 650;
         padding: 6px 10px;
+      }}
+      .guardrail-panel {{
+        height: 100%;
+        border: 1px solid #d8dee6;
+        border-radius: 6px;
+        background: #f8fafc;
+        padding: 20px 16px;
       }}
       .guardrail-item {{
         display: flex;
@@ -430,11 +409,24 @@ def build_html() -> str:
         margin-top: 8px;
         flex: 0 0 auto;
       }}
-      .controls {{
+      .contact-row {{
         display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 16px;
+        margin-bottom: 28px;
+      }}
+      .controls {{
+        display: none;
         grid-template-columns: 1fr 1fr;
         gap: 14px;
         margin: 18px 0;
+      }}
+      .panel {{
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--paper);
+        padding: 18px;
+        box-shadow: 0 8px 24px rgba(23,32,42,0.04);
       }}
       .control-title {{
         font-weight: 850;
@@ -465,13 +457,31 @@ def build_html() -> str:
       .metrics {{ grid-template-columns: repeat(5, minmax(0, 1fr)); margin-bottom: 18px; }}
       .grid-2 {{ grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }}
       .grid-3 {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
+      .scope-item {{
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--paper);
+        padding: 16px 14px;
+        min-height: 92px;
+      }}
+      .scope-value {{
+        color: var(--ink);
+        font-size: 1rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+      }}
+      .scope-label {{
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.35;
+      }}
       .metric-value {{
         font-size: clamp(1.6rem, 3vw, 2.2rem);
         line-height: 1;
-        font-weight: 500;
-        margin: 8px 0;
+        font-weight: 400;
+        margin: 10px 0;
       }}
-      .metric-label {{ font-weight: 800; }}
+      .metric-label {{ color: var(--ink); font-weight: 500; }}
       .metric-note {{
         display: inline-block;
         color: #166534;
@@ -483,18 +493,20 @@ def build_html() -> str:
       }}
       .tabs {{
         display: flex;
-        gap: 8px;
+        gap: 14px;
         flex-wrap: wrap;
         border-bottom: 1px solid var(--line);
-        margin-bottom: 20px;
+        margin: 12px 0 24px;
       }}
       .tab {{
         border: 0;
-        border-bottom: 3px solid transparent;
+        border-bottom: 2px solid transparent;
         background: transparent;
-        padding: 12px 4px 10px;
-        color: var(--muted);
-        font-weight: 850;
+        padding: 0 0 12px;
+        color: var(--ink);
+        font: inherit;
+        font-size: 0.9rem;
+        font-weight: 500;
         cursor: pointer;
       }}
       .tab.active {{
@@ -509,8 +521,8 @@ def build_html() -> str:
       }}
       .chart-note {{
         color: var(--muted);
-        font-size: 0.9rem;
-        margin: 4px 0 12px;
+        font-size: 0.86rem;
+        margin: 0 0 14px;
       }}
       table {{
         width: 100%;
@@ -553,20 +565,32 @@ def build_html() -> str:
         font-weight: 800;
       }}
       .button {{
-        min-height: 42px;
+        min-height: 40px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        border-radius: 8px;
+        border-radius: 6px;
         padding: 0 14px;
-        border: 1px solid var(--green);
-        background: var(--green);
-        color: #fff;
+        border: 1px solid #d0d7de;
+        background: #fff;
+        color: var(--ink);
         text-decoration: none;
-        font-weight: 850;
+        font-weight: 500;
         cursor: pointer;
       }}
-      .button.secondary {{ color: var(--green); background: #fff; }}
+      .button.primary {{
+        border-color: var(--green);
+        background: var(--green);
+        color: #fff;
+      }}
+      .button.secondary {{ color: var(--ink); background: #fff; }}
+      .cta-strip {{
+        border: 1px solid #cfded7;
+        border-radius: 6px;
+        padding: 16px;
+        background: #fff;
+        margin-top: 14px;
+      }}
       .actions {{ display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }}
       .footer {{
         color: var(--muted);
@@ -574,42 +598,34 @@ def build_html() -> str:
         padding: 30px 0 0;
       }}
       @media (max-width: 980px) {{
-        .hero, .controls, .grid-2, .grid-3, .metrics, .scope-grid {{
+        .hero-grid, .controls, .grid-2, .grid-3, .metrics, .scope-grid, .contact-row {{
           grid-template-columns: 1fr;
         }}
-        .nav {{ align-items: flex-start; flex-direction: column; padding: 12px 0; }}
-        .hero-main {{ display: block; }}
-        .hero-logo {{ margin-bottom: 12px; }}
+        .brand-row {{ margin-bottom: 18px; }}
       }}
     </style>
   </head>
   <body>
-    <header class="topbar">
-      <nav class="nav">
-        <a class="brand" href="index.html">
-          <img src="assets/impact_bridge_logo.png" alt="Project logo">
-          <span>Sudan Humanitarian AI Insights</span>
-        </a>
-        <div class="nav-links">
-          <a href="index.html">Project Hub</a>
-          <a href="downloads/sudan-humanitarian-ai-insights-report.pdf">Report</a>
-          <a href="downloads/sudan-humanitarian-ai-insights-carousel.pdf">Carousel</a>
-          <a href="https://github.com/Shireenelsabea/shireen-sudan-humanitarian-ai-insights">GitHub</a>
-        </div>
-      </nav>
-    </header>
-
     <main class="page">
       <section class="hero">
-        <div class="panel hero-main">
-          <img class="hero-logo" src="assets/impact_bridge_logo.png" alt="Humanitarian AI logo">
+        <div class="hero-grid">
           <div>
-            <p class="eyebrow">Fully interactive GitHub Pages dashboard</p>
+            <div class="brand-row">
+              <img class="hero-logo" src="assets/impact_bridge_logo.png" alt="Humanitarian AI logo">
+              <div>
+                <p class="eyebrow">Public portfolio prototype</p>
+                <div class="brand-mini">Humanitarian needs analysis with transparent scoring</div>
+              </div>
+            </div>
             <h1>Sudan Humanitarian AI Insights</h1>
             <p>
               A privacy-safe dashboard demo that turns synthetic community feedback and public-context
               assumptions into a hotspot watchlist, feedback triage, scenario extension, and downloadable
               decision brief.
+            </p>
+            <p class="creator-line">
+              Created by <strong>{CREATOR_NAME}</strong> for humanitarian data analysis, responsible AI,
+              and social-impact collaboration.
             </p>
             <div class="chips">
               <span class="chip">Synthetic demo data</span>
@@ -618,14 +634,19 @@ def build_html() -> str:
               <span class="chip">Human validation required</span>
             </div>
           </div>
-        </div>
-        <aside class="panel">
+        <aside class="guardrail-panel">
           <h3>Demo Guardrails</h3>
           <div class="guardrail-item"><span class="dot"></span><span>Designed for a LinkedIn case study, not live operational deployment.</span></div>
-          <div class="guardrail-item"><span class="dot"></span><span>State values and feedback rows are synthetic scenario data.</span></div>
+          <div class="guardrail-item"><span class="dot"></span><span>State values and feedback rows are synthetic and should be read as scenario data.</span></div>
           <div class="guardrail-item"><span class="dot"></span><span>Priority scores are transparent signals for review, not automated allocation decisions.</span></div>
-          <div class="guardrail-item"><span class="dot"></span><span>Public source anchors and ethical-use notes are included in Methodology.</span></div>
+          <div class="guardrail-item"><span class="dot"></span><span>Public source anchors and ethics notes are documented in Methodology Notes.</span></div>
         </aside>
+        </div>
+      </section>
+
+      <section class="contact-row" aria-label="Creator links">
+        <a class="button secondary" href="{CREATOR_LINKEDIN}">LinkedIn Profile</a>
+        <a class="button secondary" href="mailto:{CREATOR_EMAIL}?subject=Collaboration%20on%20Humanitarian%20AI%20Dashboard">Reach Shireen for Collaboration</a>
       </section>
 
       <section class="controls">
@@ -647,7 +668,7 @@ def build_html() -> str:
         <button class="tab" data-tab="feedback">Feedback Triage</button>
         <button class="tab" data-tab="scenario">Scenario & Actions</button>
         <button class="tab" data-tab="brief">Decision Brief</button>
-        <button class="tab" data-tab="methodology">Methodology</button>
+        <button class="tab" data-tab="methodology">Methodology Notes</button>
       </nav>
 
       <section id="priority" class="tab-pane active">
@@ -753,10 +774,24 @@ def build_html() -> str:
             <a class="chip" href="https://response.reliefweb.int/sudan">ReliefWeb Sudan</a>
           </div>
         </div>
+        <div class="cta-strip">
+          <p>
+            <strong>Creator and collaboration:</strong>
+            This prototype was created by <strong>{CREATOR_NAME}</strong>. She is open to collaboration with
+            humanitarian organizations, data teams, and social-impact employers working on responsible AI for
+            needs analysis, community feedback, and decision-support workflows.
+          </p>
+          <div class="actions">
+            <a class="button secondary" href="{CREATOR_LINKEDIN}">Connect on LinkedIn</a>
+            <a class="button secondary" href="mailto:{CREATOR_EMAIL}?subject=Collaboration%20on%20Humanitarian%20AI%20Dashboard">Reach Shireen for Collaboration</a>
+            <a class="button secondary" href="downloads/sudan-humanitarian-ai-insights-report.pdf">Technical Report</a>
+            <a class="button secondary" href="downloads/sudan-humanitarian-ai-insights-carousel.pdf">LinkedIn Carousel</a>
+          </div>
+        </div>
       </section>
 
       <footer class="footer">
-        Created by Shireen Al Sabea. Responsible AI for humanitarian data, MEAL, and community feedback.
+        Created by {CREATOR_NAME}. Responsible AI for humanitarian data, MEAL, and community feedback.
       </footer>
     </main>
 
@@ -832,6 +867,9 @@ def build_html() -> str:
       function card(label, value, note) {{
         return `<div class="panel"><div class="metric-label">${{label}}</div><div class="metric-value">${{value}}</div><span class="metric-note">${{note}}</span></div>`;
       }}
+      function scopeCard(value, label) {{
+        return `<div class="scope-item"><div class="scope-value">${{value}}</div><div class="scope-label">${{label}}</div></div>`;
+      }}
       function renderFilters() {{
         document.getElementById("regionFilters").innerHTML = state.regions.map(region => `
           <label class="check"><input type="checkbox" data-region="${{region}}" checked> ${{region}}</label>
@@ -851,10 +889,10 @@ def build_html() -> str:
       function renderScope() {{
         const latest = new Date(DATA.trends[DATA.trends.length - 1].month).toLocaleString("en", {{ month: "short", year: "numeric" }});
         document.getElementById("scopeGrid").innerHTML = [
-          card("18 states", "18", "Synthetic priority rows"),
-          card("30 messages", "30", "Synthetic feedback samples"),
-          card("Latest observed month", latest, "Before scenario extension"),
-          card("Decision posture", "Human review", "Validation required")
+          scopeCard("18 states", "Synthetic state-level rows used for the priority model."),
+          scopeCard("30 messages", "Synthetic feedback samples for local text triage."),
+          scopeCard(latest, "Last observed month before the simple scenario extension."),
+          scopeCard("Human review", "The dashboard supports validation, coordination, and planning.")
         ].join("");
       }}
       function renderMetrics(rows) {{
@@ -1125,7 +1163,9 @@ def build_html() -> str:
 
 def main() -> None:
     DOCS_DIR.mkdir(parents=True, exist_ok=True)
-    (DOCS_DIR / "dashboard.html").write_text(build_html(), encoding="utf-8")
+    html = build_html()
+    (DOCS_DIR / "index.html").write_text(html, encoding="utf-8")
+    (DOCS_DIR / "dashboard.html").write_text(html, encoding="utf-8")
 
 
 if __name__ == "__main__":

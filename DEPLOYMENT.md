@@ -2,11 +2,11 @@
 
 This project has three free public deployment targets:
 
-1. **GitHub Pages** for the complete project hub and fully interactive static dashboard in `docs/`
-2. **Vercel** for the same public project hub if desired
+1. **GitHub Pages** for the fully interactive public dashboard in `docs/`
+2. **Vercel** for the same public dashboard if desired
 3. **Streamlit Community Cloud** as an optional host for the original Python Streamlit app in `app/app.py`
 
-GitHub Pages now hosts the full public portfolio page, report downloads, carousel preview, project story, and an interactive JavaScript dashboard. Streamlit Community Cloud is only needed if you specifically want the original Python Streamlit app hosted too.
+GitHub Pages now opens directly into the public dashboard, matching the local Streamlit experience as closely as a free static host allows. Report downloads, carousel files, methodology notes, and creator contact links remain inside the deployed site. Streamlit Community Cloud is only needed if you specifically want the original Python Streamlit app hosted too.
 
 ## Recommended GitHub Repository
 
@@ -18,15 +18,13 @@ https://github.com/Shireenelsabea/shireen-sudan-humanitarian-ai-insights
 
 See [GITHUB_REPO_SETUP.md](GITHUB_REPO_SETUP.md) for the exact repository description, topics, and deployment settings.
 
-## Vercel: Complete Project Hub
+## Vercel: Live Dashboard
 
 The Vercel site serves:
 
-- project overview
 - fully interactive dashboard
-- dashboard explanation
 - report download
-- LinkedIn carousel preview and download
+- LinkedIn carousel download
 - methodology and ethical-use notes
 - Shireen's contact links
 
@@ -51,7 +49,7 @@ Install Command: leave empty
 Output Directory: docs
 ```
 
-## GitHub Pages: Complete Project Hub
+## GitHub Pages: Live Dashboard
 
 This repository includes:
 
