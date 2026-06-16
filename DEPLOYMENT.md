@@ -1,11 +1,12 @@
 # Deployment Guide
 
-This project has two free public deployment targets:
+This project has three free public deployment targets:
 
 1. **Vercel** for the complete project hub in `docs/`
-2. **Streamlit Community Cloud** for the live interactive dashboard in `app/app.py`
+2. **GitHub Pages** for the same complete project hub through GitHub Actions
+3. **Streamlit Community Cloud** for the live interactive dashboard in `app/app.py`
 
-Vercel is excellent for the full public portfolio page, report downloads, carousel preview, and project story. Streamlit Community Cloud is the right free host for the actual interactive Python dashboard.
+Vercel and GitHub Pages are both excellent for the full public portfolio page, report downloads, carousel preview, and project story. Streamlit Community Cloud is the right free host for the actual interactive Python dashboard.
 
 ## Recommended GitHub Repository
 
@@ -47,6 +48,29 @@ Framework Preset: Other
 Build Command: leave empty
 Install Command: leave empty
 Output Directory: docs
+```
+
+## GitHub Pages: Complete Project Hub
+
+This repository includes:
+
+```text
+.github/workflows/pages.yml
+docs/.nojekyll
+```
+
+After pushing the repository:
+
+1. Open the GitHub repository.
+2. Go to **Settings**.
+3. Go to **Pages**.
+4. Set **Source** to **GitHub Actions**.
+5. The workflow will deploy `docs/`.
+
+Expected URL:
+
+```text
+https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/
 ```
 
 ## Streamlit Community Cloud: Interactive Dashboard

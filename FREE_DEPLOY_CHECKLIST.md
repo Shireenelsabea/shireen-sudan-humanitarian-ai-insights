@@ -36,7 +36,28 @@ Output Directory: docs
 
 The repository includes `vercel.json`, so Vercel should detect these settings automatically.
 
-## 3. Deploy The Interactive Dashboard On Streamlit
+## 3. Deploy The Whole Project Hub On GitHub Pages
+
+The repository includes:
+
+```text
+.github/workflows/pages.yml
+docs/.nojekyll
+```
+
+After pushing to GitHub:
+
+```text
+Settings > Pages > Source: GitHub Actions
+```
+
+Expected URL:
+
+```text
+https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/
+```
+
+## 4. Deploy The Interactive Dashboard On Streamlit
 
 Use Streamlit Community Cloud for the Python dashboard.
 
@@ -48,7 +69,7 @@ Python version: 3.11 or 3.12
 Secrets: none
 ```
 
-## 4. Add Final Links
+## 5. Add Final Links
 
 After deployment, update:
 

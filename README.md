@@ -28,6 +28,7 @@ The goal is to show how humanitarian teams could use structured data, community 
 After deployment, add the final URLs here:
 
 - Vercel project hub: `https://shireen-sudan-humanitarian-ai-insights.vercel.app`
+- GitHub Pages project hub: `https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/`
 - Streamlit dashboard: `https://YOUR_STREAMLIT_APP.streamlit.app`
 - GitHub repository: `https://github.com/Shireenelsabea/shireen-sudan-humanitarian-ai-insights`
 
@@ -124,6 +125,32 @@ Use Streamlit Community Cloud for the live interactive dashboard:
 - Secrets: none
 
 Vercel hosts the project hub. Streamlit Community Cloud hosts the interactive Python dashboard.
+
+## Deploy The Project Hub On GitHub Pages
+
+This repository includes a GitHub Actions workflow:
+
+```text
+.github/workflows/pages.yml
+```
+
+After the repository is pushed to GitHub, open:
+
+```text
+Settings > Pages
+```
+
+Set the source to:
+
+```text
+GitHub Actions
+```
+
+The project hub will deploy to:
+
+```text
+https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/
+```
 
 ## Data Transparency
 
