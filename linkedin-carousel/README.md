@@ -1,6 +1,6 @@
-# OpenAI/Codex LinkedIn Carousel
+# LinkedIn Carousel
 
-This folder is separate from the Claude/Canva workflow.
+This folder contains the LinkedIn-ready document carousel for Shireen El Sabea's Sudan Humanitarian AI Insights project.
 
 ## Files
 

@@ -4,243 +4,659 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sudan Humanitarian AI Insights | Shireen El Sabea</title>
-    <meta name="description" content="A responsible AI dashboard demo for humanitarian needs analysis, created by Shireen El Sabea.">
+    <meta name="description" content="A complete responsible AI portfolio project for humanitarian needs analysis, created by Shireen El Sabea.">
+    <meta property="og:title" content="Sudan Humanitarian AI Insights">
+    <meta property="og:description" content="A responsible AI dashboard, report, and LinkedIn carousel for humanitarian needs analysis.">
+    <meta property="og:image" content="assets/carousel/overview_all_slides.png">
+    <meta property="og:type" content="website">
     <style>
       :root {
-        --ink: #17211c;
-        --muted: #5f6f67;
-        --green: #2d6a4f;
-        --teal: #287271;
-        --orange: #f97316;
+        --ink: #17202a;
+        --muted: #5b6675;
+        --line: #d8dee6;
         --paper: #ffffff;
-        --canvas: #f6f7f3;
-        --line: #dce4de;
+        --canvas: #f5f7f9;
+        --green: #1f6f5b;
+        --teal: #1f7a8c;
+        --amber: #c58a20;
+        --red: #b42318;
+        --blue: #315a8a;
       }
 
       * {
         box-sizing: border-box;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: Inter, Arial, Helvetica, sans-serif;
         color: var(--ink);
         background: var(--canvas);
       }
 
-      main {
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: 32px;
+      a {
+        color: inherit;
       }
 
-      .shell {
-        width: min(1120px, 100%);
-        border: 1px solid var(--line);
-        border-radius: 10px;
-        background: linear-gradient(120deg, #ffffff 0%, #eef7f4 54%, #fff5e8 100%);
-        padding: 34px;
-        box-shadow: 0 24px 60px rgba(23, 33, 28, 0.08);
+      img {
+        display: block;
+        max-width: 100%;
       }
 
-      .grid {
-        display: grid;
-        grid-template-columns: 1.15fr 0.85fr;
-        gap: 34px;
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(12px);
+      }
+
+      .nav {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        min-height: 64px;
+        display: flex;
         align-items: center;
+        justify-content: space-between;
+        gap: 18px;
       }
 
       .brand {
         display: flex;
-        gap: 14px;
         align-items: center;
-        margin-bottom: 24px;
+        gap: 10px;
+        font-weight: 850;
       }
 
       .brand img {
-        width: 76px;
-        height: 76px;
-        border-radius: 16px;
-        object-fit: cover;
-        background: #fff;
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
         border: 1px solid var(--line);
+        background: #fff;
+        object-fit: cover;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: center;
+        color: var(--muted);
+        font-size: 0.92rem;
+        font-weight: 700;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+      }
+
+      .page {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .hero {
+        min-height: calc(100vh - 64px);
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(340px, 0.72fr);
+        gap: 34px;
+        align-items: center;
+        padding: 48px 0 40px;
       }
 
       .eyebrow {
         color: var(--green);
-        font-size: 13px;
-        font-weight: 800;
+        font-size: 0.82rem;
+        font-weight: 850;
         text-transform: uppercase;
+        margin: 0 0 10px;
+      }
+
+      h1, h2, h3 {
+        margin: 0;
+        letter-spacing: 0;
       }
 
       h1 {
-        font-size: clamp(42px, 6vw, 72px);
-        line-height: 0.98;
-        margin: 0 0 18px;
-        letter-spacing: 0;
+        font-size: clamp(2.9rem, 7vw, 6rem);
+        line-height: 0.95;
+        max-width: 850px;
+      }
+
+      h2 {
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        line-height: 1;
+        margin-bottom: 16px;
+      }
+
+      h3 {
+        font-size: 1.15rem;
+        margin-bottom: 8px;
       }
 
       p {
         color: var(--muted);
-        font-size: 18px;
-        line-height: 1.55;
-        margin: 0 0 20px;
+        line-height: 1.6;
+        margin: 0;
       }
 
-      .created {
+      .lead {
+        font-size: clamp(1.08rem, 2vw, 1.28rem);
+        max-width: 760px;
+        margin-top: 22px;
+      }
+
+      .creator {
         color: var(--ink);
-        font-weight: 700;
+        font-weight: 800;
+        margin-top: 18px;
       }
 
-      .buttons {
+      .button-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 26px;
+        gap: 10px;
+        margin-top: 28px;
       }
 
       .button {
+        min-height: 44px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 44px;
-        padding: 0 18px;
         border-radius: 8px;
+        padding: 0 16px;
         text-decoration: none;
-        font-weight: 800;
+        font-weight: 850;
         border: 1px solid var(--green);
       }
 
-      .primary {
-        background: var(--green);
+      .button.primary {
         color: #fff;
+        background: var(--green);
       }
 
-      .secondary {
+      .button.secondary {
         color: var(--green);
         background: #fff;
       }
 
-      .visual {
+      .hero-panel {
         border: 1px solid var(--line);
-        border-radius: 10px;
-        background: #fff;
-        padding: 22px;
-        overflow: hidden;
+        background: var(--paper);
+        border-radius: 8px;
+        padding: 18px;
+        box-shadow: 0 20px 50px rgba(23, 32, 42, 0.08);
       }
 
-      .stage {
-        position: relative;
-        height: 310px;
+      .logo-tile {
+        height: 230px;
         display: grid;
         place-items: center;
-        overflow: hidden;
+        border: 1px solid var(--line);
         border-radius: 8px;
-        background:
-          radial-gradient(circle at 18% 28%, rgba(0, 138, 208, 0.16), transparent 25%),
-          radial-gradient(circle at 82% 38%, rgba(249, 115, 22, 0.18), transparent 26%),
-          linear-gradient(135deg, #fff 0%, #f7fbfb 100%);
+        background: #f8fafc;
+        margin-bottom: 16px;
       }
 
-      .stage::before {
-        content: "";
-        position: absolute;
-        inset: -20%;
-        background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.9) 45%, rgba(255,255,255,0.22) 55%, transparent 70%);
-        animation: sweep 3.8s ease-in-out infinite;
+      .logo-tile img {
+        width: min(74%, 260px);
+        filter: drop-shadow(0 14px 24px rgba(23, 32, 42, 0.12));
       }
 
-      .stage img {
-        width: min(72%, 280px);
-        position: relative;
-        filter: drop-shadow(0 18px 28px rgba(23, 33, 28, 0.14));
-        animation: reveal 3.8s ease-in-out infinite;
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
       }
 
-      .pill-row {
+      .fact {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        background: #fff;
+      }
+
+      .fact strong {
+        display: block;
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+      }
+
+      section {
+        padding: 62px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+
+      .section-head p {
+        max-width: 620px;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        background: var(--paper);
+        border-radius: 8px;
+        padding: 18px;
+      }
+
+      .card.accent {
+        border-left: 5px solid var(--green);
+      }
+
+      .metric {
+        font-size: 2rem;
+        font-weight: 900;
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+
+      .tag-row {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
-        margin-top: 20px;
+        margin-top: 14px;
       }
 
-      .pill {
-        border: 1px solid #cbd8d1;
+      .tag {
+        border: 1px solid #cbd5df;
         border-radius: 999px;
-        padding: 7px 12px;
-        background: rgba(255, 255, 255, 0.74);
+        padding: 6px 10px;
         color: var(--ink);
-        font-size: 14px;
+        background: #f8fafc;
+        font-size: 0.86rem;
+        font-weight: 800;
+      }
+
+      .figure {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        padding: 10px;
+      }
+
+      .figure img {
+        width: 100%;
+        border-radius: 6px;
+      }
+
+      .artifact {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-height: 100%;
+      }
+
+      .artifact a {
+        margin-top: auto;
+      }
+
+      .carousel-preview {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--paper);
+        padding: 12px;
+      }
+
+      .slides {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .slides img {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fff;
+      }
+
+      .method-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .method-item {
+        display: grid;
+        grid-template-columns: 40px minmax(0, 1fr);
+        gap: 12px;
+        align-items: start;
+      }
+
+      .step {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background: var(--green);
+        font-weight: 900;
+      }
+
+      .note {
+        border: 1px solid #bfdbfe;
+        background: #eff6ff;
+        color: #0f4f8a;
+        border-radius: 8px;
+        padding: 16px;
         font-weight: 700;
       }
 
-      @keyframes sweep {
-        0% { transform: translateX(-115%) rotate(8deg); }
-        48% { transform: translateX(115%) rotate(8deg); }
-        100% { transform: translateX(115%) rotate(8deg); }
+      .repo-block {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #101828;
+        color: #eef2f6;
+        padding: 18px;
+        overflow-x: auto;
       }
 
-      @keyframes reveal {
-        0% { opacity: 0.72; transform: scale(0.96); }
-        42% { opacity: 1; transform: scale(1.03); }
-        100% { opacity: 0.92; transform: scale(1); }
+      code {
+        font-family: Consolas, Monaco, monospace;
       }
 
-      @media (max-width: 860px) {
-        main {
-          padding: 18px;
-        }
+      .site-footer {
+        border-top: 1px solid var(--line);
+        padding: 32px 0;
+        color: var(--muted);
+      }
 
-        .shell {
-          padding: 22px;
-        }
-
-        .grid {
+      @media (max-width: 900px) {
+        .hero,
+        .grid-2,
+        .grid-3 {
           grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: auto;
+          padding-top: 34px;
+        }
+
+        .section-head {
+          display: block;
+        }
+
+        .section-head p {
+          margin-top: 10px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 14px 0;
+        }
+
+        .nav-links {
+          gap: 10px;
+        }
+
+        .facts,
+        .slides {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 3rem;
         }
       }
     </style>
   </head>
   <body>
-    <main>
-      <section class="shell">
-        <div class="grid">
-          <div>
-            <div class="brand">
-              <img src="assets/impact_bridge_logo.png" alt="Humanitarian AI logo">
-              <div>
-                <div class="eyebrow">Humanitarian AI dashboard</div>
-                <strong>AI for accountable crisis response</strong>
-              </div>
+    <header class="site-header">
+      <nav class="nav">
+        <a class="brand" href="#top">
+          <img src="assets/impact_bridge_logo.png" alt="Project logo">
+          <span>Shireen El Sabea</span>
+        </a>
+        <div class="nav-links">
+          <a href="#dashboard">Dashboard</a>
+          <a href="#artifacts">Artifacts</a>
+          <a href="#carousel">Carousel</a>
+          <a href="#methodology">Methodology</a>
+          <a href="#repo">GitHub</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top" class="page">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Responsible AI portfolio project</p>
+          <h1>Sudan Humanitarian AI Insights</h1>
+          <p class="lead">
+            A complete public project showing how humanitarian data, synthetic community feedback,
+            transparent scoring, and decision-support briefs can help teams discuss priorities with
+            more structure and accountability.
+          </p>
+          <p class="creator">Created by Shireen El Sabea.</p>
+          <div class="tag-row">
+            <span class="tag">Streamlit dashboard</span>
+            <span class="tag">Vercel project hub</span>
+            <span class="tag">LinkedIn carousel</span>
+            <span class="tag">Technical report</span>
+          </div>
+          <div class="button-row">
+            <a class="button primary" href="#artifacts">View Project Artifacts</a>
+            <a class="button secondary" href="https://github.com/Shireenelsabea" target="_blank" rel="noreferrer">Shireen GitHub</a>
+            <a class="button secondary" href="https://www.linkedin.com/in/shireenalsabea/" target="_blank" rel="noreferrer">LinkedIn Profile</a>
+          </div>
+        </div>
+        <aside class="hero-panel">
+          <div class="logo-tile">
+            <img src="assets/impact_bridge_logo.png" alt="Sudan Humanitarian AI Insights logo">
+          </div>
+          <div class="facts">
+            <div class="fact">
+              <strong>18 states</strong>
+              <p>Synthetic state-level priority data.</p>
             </div>
-            <h1>Sudan Humanitarian AI Insights</h1>
-            <p>
-              A portfolio-ready prototype showing how AI-assisted analysis can turn humanitarian data,
-              synthetic community feedback, and hotspot scoring into practical decision-support briefs.
-            </p>
-            <p class="created">
-              Created by Shireen El Sabea.
-            </p>
-            <div class="pill-row">
-              <span class="pill">No paid APIs</span>
-              <span class="pill">Local NLP scoring</span>
-              <span class="pill">AI action briefs</span>
-              <span class="pill">Responsible AI</span>
+            <div class="fact">
+              <strong>30 messages</strong>
+              <p>Privacy-safe feedback samples.</p>
             </div>
-            <div class="buttons">
-              <a class="button primary" href="#interactive-dashboard">Launch Dashboard</a>
-              <a class="button secondary" href="https://www.linkedin.com/in/shireenalsabea/">LinkedIn Profile</a>
-              <a class="button secondary" href="mailto:sabeashireen@gmail.com?subject=Collaboration%20on%20Humanitarian%20AI%20Dashboard">Reach Shireen for Collaboration</a>
+            <div class="fact">
+              <strong>0 PII</strong>
+              <p>No personal data in the demo.</p>
+            </div>
+            <div class="fact">
+              <strong>$0 stack</strong>
+              <p>Open-source local tooling.</p>
             </div>
           </div>
-          <div class="visual">
-            <div class="stage">
-              <img src="assets/impact_bridge_logo.png" alt="Animated humanitarian AI logo">
+        </aside>
+      </section>
+
+      <section id="dashboard">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Interactive dashboard</p>
+            <h2>Operational Insight Prototype</h2>
+          </div>
+          <p>
+            The Streamlit app is the interactive dashboard in the repository. Vercel hosts this
+            public project hub, while Streamlit Community Cloud is the free host for the live Python app.
+          </p>
+        </div>
+        <div class="grid-3">
+          <article class="card accent">
+            <h3>Priority and Needs</h3>
+            <p>Ranks states with a transparent composite score using displacement volume, sector gaps, access constraints, protection alerts, and funding pressure.</p>
+          </article>
+          <article class="card accent">
+            <h3>Feedback Triage</h3>
+            <p>Classifies synthetic community feedback with a rule-based local text triage layer for sector, urgency, sentiment, and matched terms.</p>
+          </article>
+          <article class="card accent">
+            <h3>Decision Briefs</h3>
+            <p>Generates a downloadable hotspot brief with drivers, validation steps, recommended review actions, and ethical-use notes.</p>
+          </article>
+        </div>
+        <div class="grid-2" style="margin-top:16px">
+          <figure class="figure">
+            <img src="assets/figures/priority_hotspots.png" alt="Priority hotspots chart">
+          </figure>
+          <figure class="figure">
+            <img src="assets/figures/sector_pressure_heatmap.png" alt="Sector pressure heatmap">
+          </figure>
+        </div>
+      </section>
+
+      <section id="artifacts">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Whole project package</p>
+            <h2>Public Artifacts</h2>
+          </div>
+          <p>
+            Everything needed for a strong GitHub repository and LinkedIn case-study post is included:
+            source code, static project hub, carousel, technical report, and deployment notes.
+          </p>
+        </div>
+        <div class="grid-3">
+          <article class="card artifact">
+            <div class="metric">01</div>
+            <h3>Interactive App Source</h3>
+            <p>Streamlit dashboard source code with local CSV data, Plotly visuals, and responsible demo guardrails.</p>
+            <a class="button secondary" href="https://github.com/Shireenelsabea/shireen-sudan-humanitarian-ai-insights" target="_blank" rel="noreferrer">Open GitHub Repo</a>
+          </article>
+          <article class="card artifact">
+            <div class="metric">02</div>
+            <h3>Technical Report</h3>
+            <p>PDF dossier explaining the case-study logic, workflow, visuals, ethics notes, and public context anchors.</p>
+            <a class="button secondary" href="downloads/sudan-humanitarian-ai-insights-report.pdf">Download Report</a>
+          </article>
+          <article class="card artifact">
+            <div class="metric">03</div>
+            <h3>LinkedIn Carousel</h3>
+            <p>A polished document carousel that introduces the problem, the AI workflow, and Shireen's collaboration CTA.</p>
+            <a class="button secondary" href="downloads/sudan-humanitarian-ai-insights-carousel.pdf">Download Carousel</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="carousel">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">LinkedIn-ready media</p>
+            <h2>Carousel Preview</h2>
+          </div>
+          <p>
+            The carousel is designed for a document post. It gives the project a polished visual story before people open the dashboard or report.
+          </p>
+        </div>
+        <div class="carousel-preview">
+          <img src="assets/carousel/overview_all_slides.png" alt="All LinkedIn carousel slides overview">
+        </div>
+        <div class="slides" style="margin-top:16px">
+          <img src="assets/carousel/Slide_1.png" alt="Carousel slide 1">
+          <img src="assets/carousel/Slide_4.png" alt="Carousel slide 4">
+          <img src="assets/carousel/Slide_9.png" alt="Carousel slide 9">
+        </div>
+      </section>
+
+      <section id="methodology">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Responsible use</p>
+            <h2>Methodology and Guardrails</h2>
+          </div>
+          <p>
+            The project is framed as a public demonstration. It is not live operational intelligence and should not be used for real allocation decisions without verified field data.
+          </p>
+        </div>
+        <div class="grid-2">
+          <div class="method-list">
+            <div class="method-item">
+              <div class="step">1</div>
+              <div>
+                <h3>Synthetic scenario data</h3>
+                <p>State-level rows and feedback examples are synthetic, calibrated around public humanitarian reporting themes.</p>
+              </div>
+            </div>
+            <div class="method-item">
+              <div class="step">2</div>
+              <div>
+                <h3>Transparent scoring</h3>
+                <p>The priority score is explained through visible drivers rather than hidden automation.</p>
+              </div>
+            </div>
+            <div class="method-item">
+              <div class="step">3</div>
+              <div>
+                <h3>Human validation</h3>
+                <p>Outputs are designed to support field review, coordination, and planning, not replace judgment.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Public context anchors</h3>
+            <p>Useful sources for case-study framing:</p>
+            <div class="tag-row">
+              <a class="tag" href="https://dtm.iom.int/sudan" target="_blank" rel="noreferrer">IOM DTM Sudan</a>
+              <a class="tag" href="https://data.humdata.org/dataset/sdn-iom-dtm-from-api" target="_blank" rel="noreferrer">HDX IOM DTM</a>
+              <a class="tag" href="https://data.humdata.org/organization/ocha-sudan" target="_blank" rel="noreferrer">OCHA Sudan HDX</a>
+              <a class="tag" href="https://response.reliefweb.int/sudan" target="_blank" rel="noreferrer">ReliefWeb Sudan</a>
+            </div>
+            <div class="note" style="margin-top:18px">
+              No personal data is included. The dashboard is a decision-support prototype for discussion, not an operational deployment.
             </div>
           </div>
         </div>
       </section>
+
+      <section id="repo">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">GitHub repository</p>
+            <h2>Prepared for Shireenelsabea</h2>
+          </div>
+          <p>
+            Recommended repository name: <strong>shireen-sudan-humanitarian-ai-insights</strong>. Keep it public so Vercel and Streamlit Community Cloud can deploy it for free.
+          </p>
+        </div>
+        <div class="repo-block">
+          <code>git remote add origin https://github.com/Shireenelsabea/shireen-sudan-humanitarian-ai-insights.git<br>
+git push -u origin main</code>
+        </div>
+        <div class="button-row">
+          <a class="button primary" href="https://github.com/Shireenelsabea" target="_blank" rel="noreferrer">Open Shireen GitHub</a>
+          <a class="button secondary" href="mailto:sabeashireen@gmail.com?subject=Collaboration%20on%20Humanitarian%20AI%20Dashboard">Reach Shireen</a>
+        </div>
+      </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="page">
+        Created by Shireen El Sabea. Responsible AI for humanitarian data, needs analysis, and community feedback.
+      </div>
+    </footer>
   </body>
 </html>

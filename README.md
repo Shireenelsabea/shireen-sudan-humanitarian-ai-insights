@@ -1,66 +1,135 @@
-# Sudan Humanitarian AI Insights Dashboard
+# Sudan Humanitarian AI Insights
 
-A first-phase, LinkedIn-ready demo showing how AI-assisted analysis can support humanitarian prioritization without paid APIs, private data, or a full production system.
+![Project preview](docs/assets/carousel/overview_all_slides.png)
 
-Created by **Shireen El Sabea**.
+A responsible AI portfolio project by **Shireen El Sabea**.
 
+This repository contains a complete public case study for humanitarian needs analysis in Sudan:
+
+- Interactive Streamlit dashboard
+- Vercel-ready project hub
+- LinkedIn carousel
+- Technical PDF report
+- Synthetic demo datasets
+- Transparent methodology and ethical-use notes
+
+The goal is to show how humanitarian teams could use structured data, community feedback triage, and transparent scoring to support better prioritization conversations without exposing private data.
+
+## Creator
+
+**Shireen El Sabea**
+
+- GitHub: https://github.com/Shireenelsabea
 - LinkedIn: https://www.linkedin.com/in/shireenalsabea/
-- Collaboration email: sabeashireen@gmail.com
+- Email: sabeashireen@gmail.com
 
-The dashboard turns a small public-data-informed humanitarian scenario into:
+## Project Links
+
+After deployment, add the final URLs here:
+
+- Vercel project hub: `https://shireen-sudan-humanitarian-ai-insights.vercel.app`
+- Streamlit dashboard: `https://YOUR_STREAMLIT_APP.streamlit.app`
+- GitHub repository: `https://github.com/Shireenelsabea/shireen-sudan-humanitarian-ai-insights`
+
+## What The Project Demonstrates
+
+The dashboard turns a synthetic humanitarian scenario into:
 
 - State-level displacement and needs visuals
-- A transparent AI-style priority score
-- Local NLP classification of synthetic community feedback
-- A simple displacement scenario forecast
-- An intervention queue for NGO decision-makers
-- A selected-hotspot AI Action Brief with recommended next steps
-- Branded logo and clean in-app logo reveal animation
+- Transparent priority scoring
+- Rule-based feedback triage for sector and urgency
+- A simple scenario extension for planning discussion
+- Review queues for humanitarian teams
+- Downloadable decision-support briefs
+- Methodology notes and ethical guardrails
 
-## Why This Demo Works
-
-This is intentionally lightweight. It is not trying to be a finished NGO platform. It is designed to show the potential of AI in a credible way: data comes in, feedback is classified, hotspots are ranked, and the output becomes something a program manager could discuss.
-
-No paid services are required. The app runs locally with Streamlit, Pandas, NumPy, and Plotly.
-
-## Deployment
-
-For the interactive dashboard, use Streamlit Community Cloud. See [DEPLOYMENT.md](DEPLOYMENT.md).
-
-For GitHub Pages or Vercel, use the static landing page in:
+## Repository Structure
 
 ```text
-docs/index.html
+app/
+  app.py                         Streamlit dashboard
+
+data/
+  state_needs.csv                Synthetic state-level scenario data
+  feedback_samples.csv           Synthetic community feedback samples
+  monthly_trends.csv             Synthetic trend data
+
+docs/
+  index.html                     Vercel project hub
+  assets/                        Logo, figures, carousel images
+  downloads/                     Public report and carousel PDFs
+
+reports/
+  study_report.tex               Technical report source
+  figures/                       Report visuals
+
+linkedin-carousel/
+  generate_carousel.py           Carousel generation script
+  slides/                        Carousel slide images
+
+requirements.txt                 Streamlit app dependencies
+vercel.json                      Vercel static deployment config
+DEPLOYMENT.md                    Deployment notes
+FREE_DEPLOY_CHECKLIST.md         Short deployment checklist
 ```
 
-GitHub Pages and Vercel are suitable for the landing page, while Streamlit Community Cloud is the suitable host for the interactive app.
-
-## Suggested Demo Flow
-
-1. Start on **Operations View** to show the map and ranked hotspots.
-2. Open **Feedback Intelligence** to show local NLP classification.
-3. Open **Hotspot Brief** and select South Darfur or North Darfur.
-4. Download the selected action brief to show how the dashboard turns analysis into a usable decision note.
-5. End with the CTA: connect with NGOs, humanitarian data teams, and social-impact employers.
-
-## Run It
+## Run The Interactive Dashboard Locally
 
 ```powershell
 pip install -r requirements.txt
 streamlit run app/app.py
 ```
 
-Then open:
+Open:
 
 ```text
 http://localhost:8501
 ```
 
+If port `8501` is already busy, Streamlit will suggest another local port.
+
+## Deploy The Project Hub On Vercel
+
+This repository includes a Vercel static configuration:
+
+```json
+{
+  "framework": null,
+  "buildCommand": null,
+  "installCommand": "",
+  "outputDirectory": "docs",
+  "cleanUrls": true
+}
+```
+
+Vercel should serve the complete project hub from:
+
+```text
+docs/index.html
+```
+
+Use these Vercel settings if asked:
+
+- Framework preset: `Other`
+- Build command: empty
+- Install command: empty
+- Output directory: `docs`
+
+## Deploy The Interactive App For Free
+
+Use Streamlit Community Cloud for the live interactive dashboard:
+
+- Main file path: `app/app.py`
+- Python version: `3.11` or `3.12`
+- Secrets: none
+
+Vercel hosts the project hub. Streamlit Community Cloud hosts the interactive Python dashboard.
+
 ## Data Transparency
 
-The included state-level rows and feedback samples are synthetic demonstration data. They are calibrated around public humanitarian themes and public context sources, but they are not operational field data.
+This is a public portfolio demonstration, not an operational deployment.
 
-No personally identifiable information is included.
+The included state-level values and feedback records are synthetic case-study data calibrated around public humanitarian reporting themes. No personal data is included.
 
 Useful public context sources:
 
@@ -69,14 +138,8 @@ Useful public context sources:
 - OCHA Sudan HDX organization page: https://data.humdata.org/organization/ocha-sudan
 - ReliefWeb Sudan response updates: https://response.reliefweb.int/sudan
 
-## Suggested Positioning
+## Ethical Note
 
-Use this as a proof-of-concept for a public post:
+This project supports human decision-making. It should not replace field validation, protection protocols, or community accountability mechanisms.
 
-> What if humanitarian teams could turn community feedback and displacement data into rapid operational insight, without exposing private data or depending on expensive tools?
-
-That is the story this prototype demonstrates.
-
-CTA:
-
-> I am open to collaboration with NGOs, humanitarian data teams, and social-impact employers interested in responsible AI for community feedback, needs analysis, and decision-support dashboards.
+The value of the prototype is not automated allocation. The value is clearer triage, better documentation, and a more structured conversation about humanitarian priorities.

@@ -1,93 +1,81 @@
 # Deployment Guide
 
-This project is a Streamlit dashboard. For the interactive dashboard, the recommended free deployment target is **Streamlit Community Cloud**.
+This project has two free public deployment targets:
 
-GitHub Pages and Vercel are useful for a static portfolio landing page, but they do not directly host a long-running Streamlit server in the same way.
+1. **Vercel** for the complete project hub in `docs/`
+2. **Streamlit Community Cloud** for the live interactive dashboard in `app/app.py`
 
-## Recommended: Streamlit Community Cloud
+Vercel is excellent for the full public portfolio page, report downloads, carousel preview, and project story. Streamlit Community Cloud is the right free host for the actual interactive Python dashboard.
 
-1. Create a GitHub repository for this folder.
-2. Push the project to GitHub.
-3. Go to https://share.streamlit.io/
-4. Choose the repository.
-5. Set the app entry point to:
+## Recommended GitHub Repository
+
+Create the public repository under Shireen's GitHub account:
+
+```text
+https://github.com/Shireenelsabea/shireen-sudan-humanitarian-ai-insights
+```
+
+See [GITHUB_REPO_SETUP.md](GITHUB_REPO_SETUP.md) for the exact repository description, topics, and deployment settings.
+
+## Vercel: Complete Project Hub
+
+The Vercel site serves:
+
+- project overview
+- dashboard explanation
+- report download
+- LinkedIn carousel preview and download
+- methodology and ethical-use notes
+- Shireen's contact links
+
+This repository includes `vercel.json`:
+
+```json
+{
+  "framework": null,
+  "buildCommand": null,
+  "installCommand": "",
+  "outputDirectory": "docs",
+  "cleanUrls": true
+}
+```
+
+When importing into Vercel, use these settings if asked:
+
+```text
+Framework Preset: Other
+Build Command: leave empty
+Install Command: leave empty
+Output Directory: docs
+```
+
+## Streamlit Community Cloud: Interactive Dashboard
+
+For the live dashboard:
+
+1. Go to https://share.streamlit.io/
+2. Sign in with GitHub.
+3. Choose Shireen's repository.
+4. Set the app entry point to:
 
 ```text
 app/app.py
 ```
 
-6. In **Advanced settings**, choose a stable Python version supported by the app, preferably Python `3.11` or `3.12`.
-7. Keep `requirements.txt` in the repository root.
-8. Deploy.
+5. In Advanced settings, choose Python `3.11` or `3.12`.
+6. Keep `requirements.txt` in the repository root.
+7. Deploy.
 
-This gives you a live interactive dashboard URL that can be used in LinkedIn posts and in the static landing page.
+This gives a public `*.streamlit.app` URL for the interactive dashboard.
 
-Official Streamlit notes:
+## GitHub Push Commands
 
-- Community Cloud is designed for public apps and is free for community sharing.
-- Dependencies are read from `requirements.txt`.
-- Python version is selected in the Community Cloud deployment UI, not from `runtime.txt`.
+After creating the empty GitHub repository:
 
-## GitHub Pages Static Landing Page
-
-This repo includes a static landing page in:
-
-```text
-docs/index.html
+```powershell
+git remote add origin https://github.com/Shireenelsabea/shireen-sudan-humanitarian-ai-insights.git
+git push -u origin main
 ```
-
-To publish it:
-
-1. Push the repository to GitHub.
-2. Open repository **Settings**.
-3. Go to **Pages**.
-4. Choose **Deploy from a branch**.
-5. Select the `main` branch and `/docs` folder.
-6. Save.
-
-After Streamlit Cloud deployment, edit `docs/index.html` and replace:
-
-```text
-#interactive-dashboard
-```
-
-with the real Streamlit dashboard URL.
-
-GitHub Pages is free for the static landing page. It cannot run the Streamlit Python app by itself.
-
-## Vercel Static Landing Page
-
-Vercel can host the static landing page:
-
-1. Import the GitHub repository into Vercel.
-2. Set the project root or output folder to:
-
-```text
-docs
-```
-
-3. Leave the build command empty.
-4. Deploy.
-
-Use the Vercel page as the public portfolio page and link its “Launch Dashboard” button to the Streamlit Cloud app.
-
-Vercel is free for a static landing page. It is not the recommended host for this Streamlit app because Streamlit expects a persistent Python web process.
-
-## Exact Free Deployment Checklist
-
-Use this sequence:
-
-1. Create a public GitHub repository.
-2. Push this project folder to the repository.
-3. Go to https://share.streamlit.io/
-4. Sign in with GitHub.
-5. Click **Create app**.
-6. Select the repo and branch.
-7. Set main file path to `app/app.py`.
-8. Open **Advanced settings** and select Python `3.11` or `3.12`.
-9. Click **Deploy**.
-10. Copy the resulting `*.streamlit.app` URL.
-11. Paste that URL into LinkedIn and optionally into `docs/index.html`.
 
 ## Contact CTA
 

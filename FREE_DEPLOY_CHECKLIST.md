@@ -1,34 +1,67 @@
 # Free Deployment Checklist
 
-The interactive dashboard should be deployed on **Streamlit Community Cloud**.
+## 1. Create The GitHub Repository
 
-Why: Streamlit Community Cloud is free for public community apps, works directly from GitHub, and supports Streamlit apps without paid hosting.
+Create a public repository under:
+
+```text
+https://github.com/Shireenelsabea
+```
+
+Repository name:
+
+```text
+shireen-sudan-humanitarian-ai-insights
+```
+
+Then push:
+
+```powershell
+git remote add origin https://github.com/Shireenelsabea/shireen-sudan-humanitarian-ai-insights.git
+git push -u origin main
+```
+
+## 2. Deploy The Whole Project Hub On Vercel
+
+Use Vercel for the complete project page in `docs/`.
+
+Settings:
+
+```text
+Framework Preset: Other
+Build Command: leave empty
+Install Command: leave empty
+Output Directory: docs
+```
+
+The repository includes `vercel.json`, so Vercel should detect these settings automatically.
+
+## 3. Deploy The Interactive Dashboard On Streamlit
+
+Use Streamlit Community Cloud for the Python dashboard.
+
+Settings:
+
+```text
+Main file path: app/app.py
+Python version: 3.11 or 3.12
+Secrets: none
+```
+
+## 4. Add Final Links
+
+After deployment, update:
+
+- `README.md`
+- `LINKEDIN_POST.md`
+- Vercel project hub if you want the dashboard button to open the Streamlit app directly
 
 ## What Is Ready
 
-- App entry point: `app/app.py`
+- Vercel project hub: `docs/index.html`
+- Vercel config: `vercel.json`
+- Streamlit app: `app/app.py`
 - Dependencies: `requirements.txt`
 - App config: `.streamlit/config.toml`
-- Static landing page: `docs/index.html`
-- Report PDF: `output/pdf/study_report.pdf`
-- LinkedIn carousel: `opoenai carousel/sudan_humanitarian_ai_linkedin_carousel.pdf`
-
-## Exact Settings
-
-When deploying on Streamlit Community Cloud:
-
-- Repository: your public GitHub repository
-- Branch: `main`
-- Main file path: `app/app.py`
-- Python version: choose `3.11` or `3.12` in Advanced settings
-- Secrets: none required
-
-## Important
-
-GitHub Pages and Vercel can host the static landing page in `docs/`, but they cannot directly run the interactive Streamlit Python app.
-
-After deployment, copy the Streamlit app URL and add it to:
-
-- LinkedIn post
-- `docs/index.html` Launch Dashboard button
-- README project links
+- Report PDF: `docs/downloads/sudan-humanitarian-ai-insights-report.pdf`
+- LinkedIn carousel: `docs/downloads/sudan-humanitarian-ai-insights-carousel.pdf`
