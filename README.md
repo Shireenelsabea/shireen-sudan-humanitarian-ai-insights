@@ -29,7 +29,8 @@ After deployment, add the final URLs here:
 
 - Vercel project hub: `https://shireen-sudan-humanitarian-ai-insights.vercel.app`
 - GitHub Pages project hub: `https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/`
-- Streamlit dashboard: `https://YOUR_STREAMLIT_APP.streamlit.app`
+- GitHub Pages dashboard: `https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/dashboard.html`
+- Optional Streamlit dashboard: `https://YOUR_STREAMLIT_APP.streamlit.app`
 - GitHub repository: `https://github.com/Shireenelsabea/shireen-sudan-humanitarian-ai-insights`
 
 ## What The Project Demonstrates
@@ -57,6 +58,7 @@ data/
 
 docs/
   index.html                     Vercel project hub
+  dashboard.html                 Fully interactive GitHub Pages dashboard
   assets/                        Logo, figures, carousel images
   downloads/                     Public report and carousel PDFs
 
@@ -150,6 +152,12 @@ The project hub will deploy to:
 
 ```text
 https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/
+```
+
+The fully interactive dashboard is hosted at:
+
+```text
+https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/dashboard.html
 ```
 
 ## Data Transparency

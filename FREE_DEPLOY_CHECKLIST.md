@@ -57,6 +57,12 @@ Expected URL:
 https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/
 ```
 
+Interactive dashboard:
+
+```text
+https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/dashboard.html
+```
+
 ## 4. Deploy The Interactive Dashboard On Streamlit
 
 Use Streamlit Community Cloud for the Python dashboard.
@@ -80,6 +86,7 @@ After deployment, update:
 ## What Is Ready
 
 - Vercel project hub: `docs/index.html`
+- GitHub Pages dashboard: `docs/dashboard.html`
 - Vercel config: `vercel.json`
 - Streamlit app: `app/app.py`
 - Dependencies: `requirements.txt`

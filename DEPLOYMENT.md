@@ -2,11 +2,11 @@
 
 This project has three free public deployment targets:
 
-1. **Vercel** for the complete project hub in `docs/`
-2. **GitHub Pages** for the same complete project hub through GitHub Actions
-3. **Streamlit Community Cloud** for the live interactive dashboard in `app/app.py`
+1. **GitHub Pages** for the complete project hub and fully interactive static dashboard in `docs/`
+2. **Vercel** for the same public project hub if desired
+3. **Streamlit Community Cloud** as an optional host for the original Python Streamlit app in `app/app.py`
 
-Vercel and GitHub Pages are both excellent for the full public portfolio page, report downloads, carousel preview, and project story. Streamlit Community Cloud is the right free host for the actual interactive Python dashboard.
+GitHub Pages now hosts the full public portfolio page, report downloads, carousel preview, project story, and an interactive JavaScript dashboard. Streamlit Community Cloud is only needed if you specifically want the original Python Streamlit app hosted too.
 
 ## Recommended GitHub Repository
 
@@ -23,6 +23,7 @@ See [GITHUB_REPO_SETUP.md](GITHUB_REPO_SETUP.md) for the exact repository descri
 The Vercel site serves:
 
 - project overview
+- fully interactive dashboard
 - dashboard explanation
 - report download
 - LinkedIn carousel preview and download
@@ -71,6 +72,12 @@ Expected URL:
 
 ```text
 https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/
+```
+
+Interactive dashboard URL:
+
+```text
+https://shireenelsabea.github.io/shireen-sudan-humanitarian-ai-insights/dashboard.html
 ```
 
 ## Streamlit Community Cloud: Interactive Dashboard
