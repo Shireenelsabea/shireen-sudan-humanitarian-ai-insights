@@ -8,7 +8,6 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
-import streamlit.components.v1 as components
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -156,7 +155,7 @@ VALIDATION_STEPS = {
 st.set_page_config(
     page_title="Sudan Humanitarian AI Insights",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
 
@@ -165,16 +164,16 @@ def apply_theme() -> None:
         """
         <style>
             :root {
-                --ink: #17211c;
-                --muted: #5f6f67;
-                --line: #dce4de;
+                --ink: #17202a;
+                --muted: #5b6675;
+                --line: #d8dee6;
                 --paper: #ffffff;
-                --canvas: #f6f7f3;
-                --green: #2d6a4f;
-                --teal: #287271;
-                --amber: #e9c46a;
-                --coral: #c44536;
-                --violet: #6d597a;
+                --canvas: #f5f7f9;
+                --green: #1f6f5b;
+                --teal: #1f7a8c;
+                --amber: #c58a20;
+                --coral: #b42318;
+                --blue: #315a8a;
             }
 
             .stApp {
@@ -183,7 +182,7 @@ def apply_theme() -> None:
             }
 
             .block-container {
-                padding-top: 0.75rem;
+                padding-top: 1rem;
                 padding-bottom: 2.5rem;
                 max-width: 1440px;
             }
@@ -201,7 +200,7 @@ def apply_theme() -> None:
             }
 
             [data-testid="stSidebar"] {
-                background: #eef3ee;
+                background: #f0f4f7;
                 border-right: 1px solid var(--line);
             }
 
@@ -216,22 +215,23 @@ def apply_theme() -> None:
                 font-weight: 800;
                 text-transform: uppercase;
                 letter-spacing: 0;
-                margin-bottom: 0.15rem;
+                margin-bottom: 0.2rem;
             }
 
             .hero {
                 border: 1px solid var(--line);
                 border-radius: 6px;
-                padding: 1.15rem 1.25rem;
-                background: linear-gradient(120deg, #ffffff 0%, #f4f0e9 58%, #eef6f5 100%);
-                margin-bottom: 0.9rem;
+                padding: 1.2rem 1.25rem;
+                background: #ffffff;
+                margin-bottom: 1rem;
+                box-shadow: 0 14px 34px rgba(23, 32, 42, 0.05);
             }
 
             .hero-grid {
                 display: grid;
-                grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+                grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
                 gap: 1rem;
-                align-items: center;
+                align-items: stretch;
             }
 
             .brand-row {
@@ -242,18 +242,18 @@ def apply_theme() -> None:
             }
 
             .hero-logo {
-                width: 68px;
-                height: 68px;
-                border-radius: 12px;
+                width: 58px;
+                height: 58px;
+                border-radius: 10px;
                 object-fit: cover;
-                border: 1px solid #d8e3de;
+                border: 1px solid #d8dee6;
                 background: #ffffff;
             }
 
             .hero h1 {
                 margin: 0 0 0.25rem 0;
-                font-size: clamp(2rem, 4vw, 3.25rem);
-                line-height: 1.05;
+                font-size: clamp(1.9rem, 3.2vw, 2.75rem);
+                line-height: 1.08;
             }
 
             .hero p {
@@ -267,14 +267,14 @@ def apply_theme() -> None:
                 display: flex;
                 gap: 0.45rem;
                 flex-wrap: wrap;
-                margin-top: 0.8rem;
+                margin-top: 0.85rem;
             }
 
             .badge {
-                border: 1px solid #cbd8d1;
+                border: 1px solid #cbd5df;
                 border-radius: 999px;
-                padding: 0.22rem 0.62rem;
-                background: rgba(255, 255, 255, 0.72);
+                padding: 0.24rem 0.62rem;
+                background: #f7fafc;
                 color: var(--ink);
                 font-size: 0.82rem;
                 font-weight: 650;
@@ -314,8 +314,83 @@ def apply_theme() -> None:
             }
 
             .brand-mini {
-                color: var(--green);
+                color: var(--muted);
+                font-size: 0.9rem;
+                font-weight: 700;
+            }
+
+            .guardrail-panel {
+                height: 100%;
+                border: 1px solid #d8dee6;
+                border-radius: 6px;
+                background: #f8fafc;
+                padding: 0.9rem 0.95rem;
+            }
+
+            .guardrail-title {
+                color: var(--ink);
+                font-size: 0.95rem;
                 font-weight: 800;
+                margin-bottom: 0.6rem;
+            }
+
+            .guardrail-item {
+                display: flex;
+                gap: 0.55rem;
+                align-items: flex-start;
+                color: var(--muted);
+                font-size: 0.9rem;
+                line-height: 1.35;
+                margin-bottom: 0.55rem;
+            }
+
+            .status-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 999px;
+                margin-top: 0.35rem;
+                background: var(--green);
+                flex: 0 0 auto;
+            }
+
+            .scope-strip {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 0.7rem;
+                margin: 0.75rem 0 1rem 0;
+            }
+
+            .scope-item {
+                border: 1px solid var(--line);
+                border-radius: 6px;
+                background: var(--paper);
+                padding: 0.75rem 0.85rem;
+                min-height: 86px;
+            }
+
+            .scope-value {
+                color: var(--ink);
+                font-size: 1rem;
+                font-weight: 800;
+                margin-bottom: 0.2rem;
+            }
+
+            .scope-label {
+                color: var(--muted);
+                font-size: 0.86rem;
+                line-height: 1.35;
+            }
+
+            .section-kicker {
+                color: var(--muted);
+                font-size: 0.88rem;
+                margin: -0.2rem 0 0.7rem 0;
+            }
+
+            .chart-note {
+                color: var(--muted);
+                font-size: 0.86rem;
+                margin: -0.25rem 0 0.7rem 0;
             }
 
             @media (max-width: 980px) {
@@ -323,8 +398,14 @@ def apply_theme() -> None:
                     grid-template-columns: 1fr;
                 }
 
-                .hero-media {
-                    max-width: 560px;
+                .scope-strip {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
+            }
+
+            @media (max-width: 640px) {
+                .scope-strip {
+                    grid-template-columns: 1fr;
                 }
             }
 
@@ -334,6 +415,7 @@ def apply_theme() -> None:
                 border-radius: 6px;
                 padding: 0.85rem 0.95rem;
                 min-height: 106px;
+                box-shadow: 0 8px 24px rgba(23, 32, 42, 0.04);
             }
 
             div[data-testid="stMetricLabel"] p {
@@ -370,7 +452,7 @@ def apply_theme() -> None:
             }
 
             .custom-metric-value {
-                color: #000000;
+                color: var(--ink);
                 font-size: clamp(1.35rem, 1.9vw, 1.85rem);
                 line-height: 1.15;
                 margin-bottom: 0.45rem;
@@ -378,8 +460,8 @@ def apply_theme() -> None:
 
             .custom-metric-delta {
                 display: inline-block;
-                color: #087f3c;
-                background: #dff4e7;
+                color: #166534;
+                background: #dcfce7;
                 border-radius: 999px;
                 padding: 0.1rem 0.45rem;
                 font-size: 0.82rem;
@@ -478,7 +560,7 @@ def apply_theme() -> None:
                 border: 1px solid #cfded7;
                 border-radius: 6px;
                 padding: 1rem;
-                background: linear-gradient(100deg, #ffffff 0%, #eef7f4 52%, #fff5e8 100%);
+                background: #ffffff;
                 margin-top: 0.85rem;
             }
 
@@ -634,7 +716,7 @@ def make_forecast(trends: pd.DataFrame, months: int = 3) -> pd.DataFrame:
         {
             "month": future_months,
             "total_idps": np.round(slope * future_x + intercept).astype(int),
-            "series": "Scenario forecast",
+            "series": "Linear scenario extension",
         }
     )
     return pd.concat([actual, forecast], ignore_index=True)
@@ -729,12 +811,12 @@ def build_hotspot_brief_text(row: pd.Series, drivers: list[dict[str, object]], f
 
     return "\n".join(
         [
-            f"AI Action Brief: {row['state']}",
+            f"Decision-Support Brief: {row['state']}",
             f"Priority: {level} | Score: {row['priority_score']:.1f}/100",
             f"Estimated IDPs: {format_int(row['idps'])} | Children estimate: {format_int(row['children_estimate'])}",
             "",
             "Why this hotspot matters:",
-            "The dashboard ranks this area based on displacement volume, sector gaps, access constraints, protection alerts, and funding pressure.",
+            "The dashboard ranks this area using a transparent demo score: displacement volume, sector gaps, access constraints, protection alerts, and funding pressure.",
             "Top drivers: " + "; ".join(f"{driver['label']} ({driver['display']})" for driver in drivers[:4]),
             "",
             "Recommended moves:",
@@ -749,8 +831,8 @@ def build_hotspot_brief_text(row: pd.Series, drivers: list[dict[str, object]], f
             "Ethical note:",
             "This is a decision-support brief. It should guide human review, not replace field validation or community accountability.",
             "",
-            "CTA:",
-            "Use this prototype to discuss partnerships with NGOs, humanitarian data teams, and social-impact employers interested in responsible AI.",
+            "Demo note:",
+            "This brief was generated from synthetic case-study data for portfolio demonstration and discussion.",
         ]
     )
 
@@ -771,7 +853,7 @@ def plot_map(df: pd.DataFrame) -> go.Figure:
             "lat": False,
             "lon": False,
         },
-        color_continuous_scale=["#287271", "#e9c46a", "#c44536"],
+        color_continuous_scale=["#1f7a8c", "#c58a20", "#b42318"],
         size_max=44,
         projection="natural earth",
     )
@@ -805,9 +887,9 @@ def plot_priority_bar(df: pd.DataFrame) -> go.Figure:
         orientation="h",
         color="priority_level",
         color_discrete_map={
-            "Critical": "#c44536",
-            "High": "#e9c46a",
-            "Elevated": "#287271",
+            "Critical": "#b42318",
+            "High": "#c58a20",
+            "Elevated": "#1f7a8c",
         },
         text="priority_score",
     )
@@ -840,7 +922,7 @@ def plot_sector_heatmap(df: pd.DataFrame) -> go.Figure:
             z=z,
             x=[DRIVER_LABELS[col] for col in columns],
             y=heat["state"],
-            colorscale=[[0, "#e8f1ed"], [0.55, "#e9c46a"], [1, "#c44536"]],
+            colorscale=[[0, "#e6eef2"], [0.55, "#c58a20"], [1, "#b42318"]],
             hovertemplate="%{y}<br>%{x}: %{z:.0f}%<extra></extra>",
             colorbar=dict(title="Gap"),
         )
@@ -858,157 +940,82 @@ def render_header() -> None:
     logo_uri = asset_data_uri(LOGO_PATH, "image/png")
     logo_html = f'<img class="hero-logo" src="{logo_uri}" alt="Humanitarian AI logo">' if logo_uri else ""
 
-    with st.container(border=True):
-        copy_col, media_col = st.columns([1.45, 0.75], vertical_alignment="center")
-        with copy_col:
-            st.markdown(
-                f"""
-                <div class="brand-row">
-                    {logo_html}
-                    <div>
-                        <div class="eyebrow">Humanitarian intelligence demo</div>
-                        <div class="brand-mini">AI for accountable crisis response</div>
-                    </div>
-                </div>
-                <h1>Sudan Humanitarian AI Insights</h1>
-                <p>
-                    A branded first-phase prototype showing how public crisis context and privacy-safe synthetic
-                    feedback can become rapid operational insight for NGO teams, donors, and social-impact employers.
-                </p>
-                <p class="creator-line">
-                    Created by <strong>{CREATOR_NAME}</strong> for humanitarian AI, data analysis, and social-impact collaboration.
-                </p>
-                <div class="badge-row">
-                    <span class="badge">No paid APIs</span>
-                    <span class="badge">Local NLP scoring</span>
-                    <span class="badge">AI action briefs</span>
-                    <span class="badge">Deployment-ready assets</span>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-            contact_1, contact_2 = st.columns([0.34, 0.66])
-            contact_1.link_button("LinkedIn Profile", CREATOR_LINKEDIN, width="stretch")
-            contact_2.link_button(
-                "Reach Shireen for Collaboration",
-                f"mailto:{CREATOR_EMAIL}?subject=Collaboration%20on%20Humanitarian%20AI%20Dashboard",
-                width="stretch",
-            )
-        with media_col:
-            if logo_uri:
-                components.html(
-                    f"""
-                    <style>
-                        body {{
-                            margin: 0;
-                            background: transparent;
-                            font-family: Arial, sans-serif;
-                        }}
-                        .reveal-shell {{
-                            border: 1px solid #d9e5df;
-                            border-radius: 8px;
-                            overflow: hidden;
-                            background: #ffffff;
-                            box-shadow: 0 14px 34px rgba(23, 33, 28, 0.08);
-                        }}
-                        .stage {{
-                            position: relative;
-                            height: 190px;
-                            display: grid;
-                            place-items: center;
-                            overflow: hidden;
-                            background:
-                                radial-gradient(circle at 20% 30%, rgba(0, 138, 208, 0.14), transparent 24%),
-                                radial-gradient(circle at 82% 42%, rgba(255, 111, 0, 0.16), transparent 25%),
-                                linear-gradient(135deg, #ffffff 0%, #f7fbfb 100%);
-                        }}
-                        .stage::before {{
-                            content: "";
-                            position: absolute;
-                            inset: -20%;
-                            background:
-                                linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.85) 45%, rgba(255,255,255,0.2) 54%, transparent 70%);
-                            transform: translateX(-100%) rotate(8deg);
-                            animation: sweep 3.8s ease-in-out infinite;
-                        }}
-                        .logo {{
-                            position: relative;
-                            width: min(68%, 230px);
-                            filter: drop-shadow(0 14px 24px rgba(23, 33, 28, 0.12));
-                            animation: reveal 3.8s ease-in-out infinite;
-                        }}
-                        .ring {{
-                            position: absolute;
-                            width: 78%;
-                            max-width: 260px;
-                            aspect-ratio: 1;
-                            border: 1px solid rgba(45,106,79,0.18);
-                            border-radius: 50%;
-                            animation: pulse 3.8s ease-in-out infinite;
-                        }}
-                        .dot {{
-                            position: absolute;
-                            width: 7px;
-                            height: 7px;
-                            border-radius: 50%;
-                            background: #0b74ba;
-                            box-shadow: 0 0 0 5px rgba(11,116,186,0.08);
-                            animation: float 4.8s ease-in-out infinite;
-                        }}
-                        .dot.orange {{
-                            background: #f97316;
-                            box-shadow: 0 0 0 5px rgba(249,115,22,0.10);
-                        }}
-                        .d1 {{ left: 18%; top: 30%; }}
-                        .d2 {{ left: 76%; top: 28%; animation-delay: 0.4s; }}
-                        .d3 {{ left: 68%; top: 74%; animation-delay: 0.8s; }}
-                        .d4 {{ left: 25%; top: 72%; animation-delay: 1.2s; }}
-                        .caption {{
-                            color: #5f6f67;
-                            font-size: 13px;
-                            padding: 10px 12px;
-                            border-top: 1px solid #dce4de;
-                            display: flex;
-                            justify-content: space-between;
-                            gap: 10px;
-                        }}
-                        @keyframes reveal {{
-                            0% {{ opacity: 0.7; transform: scale(0.96); }}
-                            42% {{ opacity: 1; transform: scale(1.02); }}
-                            100% {{ opacity: 0.92; transform: scale(1); }}
-                        }}
-                        @keyframes sweep {{
-                            0% {{ transform: translateX(-115%) rotate(8deg); }}
-                            48% {{ transform: translateX(115%) rotate(8deg); }}
-                            100% {{ transform: translateX(115%) rotate(8deg); }}
-                        }}
-                        @keyframes pulse {{
-                            0% {{ opacity: 0.25; transform: scale(0.95); }}
-                            45% {{ opacity: 0.72; transform: scale(1.04); }}
-                            100% {{ opacity: 0.3; transform: scale(1); }}
-                        }}
-                        @keyframes float {{
-                            0%, 100% {{ transform: translateY(0); }}
-                            50% {{ transform: translateY(-9px); }}
-                        }}
-                    </style>
-                    <div class="reveal-shell">
-                        <div class="stage">
-                            <div class="ring"></div>
-                            <span class="dot d1"></span>
-                            <span class="dot orange d2"></span>
-                            <span class="dot d3"></span>
-                            <span class="dot orange d4"></span>
-                            <img class="logo" src="{logo_uri}" alt="{CREATOR_NAME} humanitarian AI logo">
-                        </div>
-                        <div class="caption">
-                            <span>Clean logo reveal</span>
-                            <span>Portfolio-ready deployment</span>
+    st.markdown(
+        f"""
+        <div class="hero">
+            <div class="hero-grid">
+                <div>
+                    <div class="brand-row">
+                        {logo_html}
+                        <div>
+                            <div class="eyebrow">Public portfolio prototype</div>
+                            <div class="brand-mini">Humanitarian needs analysis with transparent scoring</div>
                         </div>
                     </div>
-                    """,
-                    height=260,
-                )
+                    <h1>Sudan Humanitarian AI Insights</h1>
+                    <p>
+                        A privacy-safe dashboard demo that turns synthetic community feedback and
+                        public-context assumptions into a hotspot watchlist, feedback triage, scenario
+                        extension, and downloadable decision brief.
+                    </p>
+                    <p class="creator-line">
+                        Created by <strong>{CREATOR_NAME}</strong> for humanitarian data analysis,
+                        responsible AI, and social-impact collaboration.
+                    </p>
+                    <div class="badge-row">
+                        <span class="badge">Synthetic demo data</span>
+                        <span class="badge">No personal data</span>
+                        <span class="badge">Rule-based text triage</span>
+                        <span class="badge">Human validation required</span>
+                    </div>
+                </div>
+                <div class="guardrail-panel">
+                    <div class="guardrail-title">Demo Guardrails</div>
+                    <div class="guardrail-item"><span class="status-dot"></span><span>Designed for a LinkedIn case study, not live operational deployment.</span></div>
+                    <div class="guardrail-item"><span class="status-dot"></span><span>State values and feedback rows are synthetic and should be read as scenario data.</span></div>
+                    <div class="guardrail-item"><span class="status-dot"></span><span>Priority scores are transparent signals for review, not automated allocation decisions.</span></div>
+                    <div class="guardrail-item"><span class="status-dot"></span><span>Public source anchors and ethics notes are documented in Methodology Notes.</span></div>
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    contact_1, contact_2 = st.columns([0.34, 0.66])
+    contact_1.link_button("LinkedIn Profile", CREATOR_LINKEDIN, width="stretch")
+    contact_2.link_button(
+        "Reach Shireen for Collaboration",
+        f"mailto:{CREATOR_EMAIL}?subject=Collaboration%20on%20Humanitarian%20AI%20Dashboard",
+        width="stretch",
+    )
+
+
+def render_demo_scope(states: pd.DataFrame, trends: pd.DataFrame, feedback_ai: pd.DataFrame) -> None:
+    latest_month = trends["month"].max().strftime("%b %Y")
+    st.markdown(
+        f"""
+        <div class="scope-strip">
+            <div class="scope-item">
+                <div class="scope-value">{len(states)} states</div>
+                <div class="scope-label">Synthetic state-level rows used for the priority model.</div>
+            </div>
+            <div class="scope-item">
+                <div class="scope-value">{len(feedback_ai)} messages</div>
+                <div class="scope-label">Synthetic feedback samples for local text triage.</div>
+            </div>
+            <div class="scope-item">
+                <div class="scope-value">{latest_month}</div>
+                <div class="scope-label">Last observed month before the simple scenario extension.</div>
+            </div>
+            <div class="scope-item">
+                <div class="scope-value">Human review</div>
+                <div class="scope-label">The dashboard supports validation, coordination, and planning.</div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def render_metrics(df: pd.DataFrame) -> None:
@@ -1019,16 +1026,16 @@ def render_metrics(df: pd.DataFrame) -> None:
     top_state = df.sort_values("priority_score", ascending=False).iloc[0]["state"]
 
     col1, col2, col3, col4, col5 = st.columns(5)
-    col1.metric("Estimated IDPs", format_int(total_idps), f"{len(df)} states")
-    col2.metric("Children estimate", format_int(children), f"{children / total_idps:.0%} of caseload")
-    col3.metric("Average priority", f"{avg_priority:.1f}/100", "Transparent scoring")
-    col4.metric("Critical states", f"{critical_count}", "Immediate review")
+    col1.metric("Demo IDP caseload", format_int(total_idps), f"{len(df)} states in scope")
+    col2.metric("Estimated children", format_int(children), f"{children / total_idps:.0%} derived share")
+    col3.metric("Mean priority score", f"{avg_priority:.1f}/100", "Composite model")
+    col4.metric("Critical watchlist", f"{critical_count}", "Review first")
     col5.markdown(
         f"""
         <div class="custom-metric">
-            <div class="custom-metric-label">Top hotspot</div>
+            <div class="custom-metric-label">Highest ranked state</div>
             <div class="custom-metric-value">{top_state}</div>
-            <div class="custom-metric-delta">Highest composite score</div>
+            <div class="custom-metric-delta">By demo priority score</div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -1063,9 +1070,9 @@ def render_hotspot_brief(df: pd.DataFrame, feedback_ai: pd.DataFrame) -> None:
     brief_text = build_hotspot_brief_text(row, drivers, related_feedback)
     validation_steps = VALIDATION_STEPS.get(str(row["priority_level"]), VALIDATION_STEPS["Elevated"])
 
-    st.markdown("#### AI Action Brief")
+    st.markdown("#### Decision-Support Brief")
     top_line = (
-        f"{row['state']} is marked as {row['priority_level']} because the composite model combines "
+        f"{row['state']} is marked as {row['priority_level']} because the composite score combines "
         f"large displacement volume, sector pressure, protection alerts, access constraints, and funding gaps."
     )
     driver_html = "".join(
@@ -1084,7 +1091,7 @@ def render_hotspot_brief(df: pd.DataFrame, feedback_ai: pd.DataFrame) -> None:
                 <div class="mini-label">Recommended response posture</div>
                 <p>
                     Treat this hotspot as a decision-support signal. Use it to prioritize field validation,
-                    coordination, and resource planning before final allocation.
+                    coordination, and resource planning before any final allocation decision.
                 </p>
             </div>
             """,
@@ -1094,7 +1101,7 @@ def render_hotspot_brief(df: pd.DataFrame, feedback_ai: pd.DataFrame) -> None:
         st.download_button(
             "Download selected hotspot brief",
             data=brief_text,
-            file_name=f"{selected_state.lower().replace(' ', '_')}_ai_action_brief.txt",
+            file_name=f"{selected_state.lower().replace(' ', '_')}_decision_brief.txt",
             mime="text/plain",
         )
 
@@ -1102,11 +1109,11 @@ def render_hotspot_brief(df: pd.DataFrame, feedback_ai: pd.DataFrame) -> None:
         m1, m2 = st.columns(2)
         m1.metric("Priority score", f"{row['priority_score']:.1f}/100", row["priority_level"])
         m2.metric("Estimated IDPs", format_int(row["idps"]), f"{format_int(row['children_estimate'])} children")
-        st.markdown("##### Next Steps")
+        st.markdown("##### Validation Steps")
         for step in validation_steps:
             st.markdown(f'<div class="step-card">{step}</div>', unsafe_allow_html=True)
 
-    st.markdown("#### What To Do With This Spot")
+    st.markdown("#### Recommended Review Actions")
     action_1, action_2, action_3 = st.columns(3)
     for column, driver in zip([action_1, action_2, action_3], drivers[:3]):
         with column:
@@ -1134,8 +1141,8 @@ def render_hotspot_brief(df: pd.DataFrame, feedback_ai: pd.DataFrame) -> None:
                 "date": st.column_config.DateColumn("Date", format="YYYY-MM-DD"),
                 "channel": "Channel",
                 "message": "Synthetic feedback",
-                "ai_sector": "AI sector",
-                "ai_urgency": "AI urgency",
+                "ai_sector": "Predicted sector",
+                "ai_urgency": "Predicted urgency",
                 "confidence": st.column_config.ProgressColumn("Confidence", min_value=0, max_value=100, format="%d%%"),
             },
         )
@@ -1147,10 +1154,10 @@ def render_cta_strip() -> None:
     st.markdown(
         f"""
         <div class="cta-strip">
-            <strong>CTA for employers and NGO partners:</strong>
-            This platform was created by <strong>{CREATOR_NAME}</strong>. She is open to collaboration with
-            humanitarian organizations, data teams, and social-impact employers interested in responsible AI for
-            needs analysis, community feedback, and decision-support dashboards.
+            <strong>Creator and collaboration:</strong>
+            This prototype was created by <strong>{CREATOR_NAME}</strong>. She is open to collaboration with
+            humanitarian organizations, data teams, and social-impact employers working on responsible AI for
+            needs analysis, community feedback, and decision-support workflows.
             <br>
             <strong>LinkedIn:</strong> <a href="{CREATOR_LINKEDIN}" target="_blank">{CREATOR_LINKEDIN}</a>
             <br>
@@ -1175,16 +1182,16 @@ def main() -> None:
 
     if LOGO_PATH.exists():
         st.sidebar.image(str(LOGO_PATH), width=128)
-    st.sidebar.markdown("### AI Humanitarian Insights")
-    st.sidebar.caption(f"Created by {CREATOR_NAME}.")
+    st.sidebar.markdown("### Sudan AI Insights")
+    st.sidebar.caption(f"Portfolio prototype by {CREATOR_NAME}.")
     st.sidebar.link_button("LinkedIn Profile", CREATOR_LINKEDIN, width="stretch")
     st.sidebar.link_button(
-        "Collaboration Email",
+        "Email",
         f"mailto:{CREATOR_EMAIL}?subject=Collaboration%20on%20Humanitarian%20AI%20Dashboard",
         width="stretch",
     )
     st.sidebar.markdown("---")
-    st.sidebar.markdown("### Filters")
+    st.sidebar.markdown("### Demo Controls")
     region_filter = st.sidebar.multiselect(
         "Region",
         sorted(states["region"].unique()),
@@ -1195,12 +1202,14 @@ def main() -> None:
         ["Critical", "High", "Elevated"],
         default=["Critical", "High", "Elevated"],
     )
+    st.sidebar.info("Demo data only. Use Methodology Notes for public context and ethical-use caveats.")
 
     filtered = states[
         states["region"].isin(region_filter) & states["priority_level"].isin(level_filter)
     ].copy()
 
     render_header()
+    render_demo_scope(states, trends, feedback_ai)
 
     if filtered.empty:
         st.warning("No states match the current filters.")
@@ -1209,19 +1218,31 @@ def main() -> None:
     render_metrics(filtered)
 
     overview_tab, feedback_tab, forecast_tab, brief_tab, notes_tab = st.tabs(
-        ["Operations View", "Feedback Intelligence", "Forecast & Actions", "Hotspot Brief", "Data Notes"]
+        ["Priority & Needs", "Feedback Triage", "Scenario & Actions", "Decision Brief", "Methodology Notes"]
     )
 
     with overview_tab:
         left, right = st.columns([1.35, 1])
         with left:
-            st.markdown("#### Geographic Priority")
+            st.markdown("#### Priority Geography")
+            st.markdown(
+                '<div class="chart-note">Bubble size shows demo IDP caseload; color shows composite priority score.</div>',
+                unsafe_allow_html=True,
+            )
             st.plotly_chart(plot_map(filtered), width="stretch")
         with right:
-            st.markdown("#### Ranked Hotspots")
+            st.markdown("#### Top Watchlist")
+            st.markdown(
+                '<div class="chart-note">Highest scoring states in the current filter selection.</div>',
+                unsafe_allow_html=True,
+            )
             st.plotly_chart(plot_priority_bar(filtered), width="stretch")
 
-        st.markdown("#### Sector Pressure Matrix")
+        st.markdown("#### Sector and Access Pressure")
+        st.markdown(
+            '<div class="chart-note">Percent values are synthetic scenario indicators, not live assessments.</div>',
+            unsafe_allow_html=True,
+        )
         st.plotly_chart(plot_sector_heatmap(filtered), width="stretch")
 
         percent_columns = [
@@ -1232,6 +1253,7 @@ def main() -> None:
         ]
         display_states = filtered.sort_values("priority_score", ascending=False).copy()
         display_states[percent_columns] = (display_states[percent_columns] * 100).round(0).astype(int)
+        st.markdown("#### State-Level Priority Table")
         st.dataframe(
             display_states[
                 [
@@ -1256,20 +1278,20 @@ def main() -> None:
                 "priority_score": st.column_config.NumberColumn("Score", format="%.1f"),
                 "idps": st.column_config.NumberColumn("IDPs", format="%d"),
                 "children_estimate": st.column_config.NumberColumn("Children estimate", format="%d"),
-                "food_insecurity_pct": st.column_config.ProgressColumn("Food", format="%d%%", min_value=0, max_value=100),
-                "wash_gap_pct": st.column_config.ProgressColumn("WASH", format="%d%%", min_value=0, max_value=100),
-                "health_gap_pct": st.column_config.ProgressColumn("Health", format="%d%%", min_value=0, max_value=100),
-                "access_constraint": st.column_config.ProgressColumn("Access", format="%d%%", min_value=0, max_value=100),
+                "food_insecurity_pct": st.column_config.ProgressColumn("Food gap", format="%d%%", min_value=0, max_value=100),
+                "wash_gap_pct": st.column_config.ProgressColumn("WASH gap", format="%d%%", min_value=0, max_value=100),
+                "health_gap_pct": st.column_config.ProgressColumn("Health gap", format="%d%%", min_value=0, max_value=100),
+                "access_constraint": st.column_config.ProgressColumn("Access constraint", format="%d%%", min_value=0, max_value=100),
             },
         )
 
     with feedback_tab:
         kpi1, kpi2, kpi3, kpi4 = st.columns(4)
         match_rate = feedback_ai["match"].mean()
-        critical_feedback = (feedback_ai["urgency"] == "Critical").sum()
+        critical_feedback = (feedback_ai["ai_urgency"] == "Critical").sum()
         kpi1.metric("Feedback records", f"{len(feedback_ai)}", "Synthetic sample")
-        kpi2.metric("Local NLP match", f"{match_rate:.0%}", "Baseline classifier")
-        kpi3.metric("Critical signals", f"{critical_feedback}", "Immediate triage")
+        kpi2.metric("Rule match rate", f"{match_rate:.0%}", "Against demo labels")
+        kpi3.metric("Critical signals", f"{critical_feedback}", "Predicted urgency")
         kpi4.metric("States represented", feedback_ai["state"].nunique(), "Across Sudan")
 
         chart_col, table_col = st.columns([0.9, 1.25])
@@ -1281,10 +1303,10 @@ def main() -> None:
                 names="sector",
                 values="count",
                 hole=0.52,
-                color_discrete_sequence=["#287271", "#e9c46a", "#c44536", "#6d597a", "#4f7cac", "#d88c4a"],
+                color_discrete_sequence=["#1f7a8c", "#c58a20", "#b42318", "#315a8a", "#6b7280", "#7c5c2e"],
             )
             fig.update_layout(
-                title="Classified Feedback by Sector",
+                title="Predicted Sector Mix",
                 height=360,
                 margin=dict(l=0, r=0, t=45, b=0),
                 paper_bgcolor="rgba(0,0,0,0)",
@@ -1303,10 +1325,10 @@ def main() -> None:
                 y="count",
                 color="ai_urgency",
                 category_orders={"ai_urgency": urgency_order},
-                color_discrete_map={"Critical": "#c44536", "High": "#e9c46a", "Medium": "#287271"},
+                color_discrete_map={"Critical": "#b42318", "High": "#c58a20", "Medium": "#1f7a8c"},
             )
             fig2.update_layout(
-                title="Urgency Signals",
+                title="Predicted Urgency by Sector",
                 xaxis_title=None,
                 yaxis_title="Records",
                 height=310,
@@ -1318,7 +1340,7 @@ def main() -> None:
             st.plotly_chart(fig2, width="stretch")
 
         with table_col:
-            st.markdown("#### Synthetic Community Feedback")
+            st.markdown("#### Feedback Sample and Rule-Based Tags")
             display_feedback = feedback_ai[
                 [
                     "date",
@@ -1345,15 +1367,15 @@ def main() -> None:
                     "state": "State",
                     "channel": "Channel",
                     "message": "Feedback",
-                    "sector": "Human label",
-                    "urgency": "Human urgency",
-                    "ai_sector": "AI sector",
-                    "ai_urgency": "AI urgency",
-                    "confidence": st.column_config.ProgressColumn("Confidence", min_value=0, max_value=100, format="%d%%"),
+                    "sector": "Demo label",
+                    "urgency": "Demo urgency",
+                    "ai_sector": "Predicted sector",
+                    "ai_urgency": "Predicted urgency",
+                    "confidence": st.column_config.ProgressColumn("Rule confidence", min_value=0, max_value=100, format="%d%%"),
                 },
             )
 
-        st.markdown("#### Live Local Classifier")
+        st.markdown("#### Test the Rule-Based Classifier")
         sample = st.text_area(
             "Community feedback sample",
             value="The water point is broken and children are sick after using unsafe water.",
@@ -1364,7 +1386,7 @@ def main() -> None:
         r1.metric("Sector", result["sector"])
         r2.metric("Urgency", result["urgency"])
         r3.metric("Sentiment", result["sentiment"])
-        r4.metric("Confidence", f"{result['confidence']:.0%}")
+        r4.metric("Rule confidence", f"{result['confidence']:.0%}")
         st.markdown(
             f"""
             <div class="result-box">
@@ -1383,11 +1405,11 @@ def main() -> None:
             y="total_idps",
             color="series",
             markers=True,
-            color_discrete_map={"Observed": "#287271", "Scenario forecast": "#c44536"},
+            color_discrete_map={"Observed": "#1f7a8c", "Linear scenario extension": "#b42318"},
         )
         forecast_fig.update_traces(line=dict(width=3))
         forecast_fig.update_layout(
-            title="Displacement Trend and Scenario Forecast",
+            title="Displacement Trend with Linear Scenario Extension",
             yaxis_title="Estimated IDPs",
             xaxis_title=None,
             height=390,
@@ -1397,6 +1419,10 @@ def main() -> None:
             legend_title=None,
         )
         st.plotly_chart(forecast_fig, width="stretch")
+        st.markdown(
+            '<div class="chart-note">The extension is a simple linear scenario for demonstration, not a predictive model.</div>',
+            unsafe_allow_html=True,
+        )
 
         sector_long = trends.melt(
             id_vars=["month"],
@@ -1423,10 +1449,10 @@ def main() -> None:
                 x="month",
                 y="reports",
                 color="sector",
-                color_discrete_sequence=["#287271", "#4f7cac", "#e9c46a", "#d88c4a", "#c44536"],
+                color_discrete_sequence=["#1f7a8c", "#315a8a", "#c58a20", "#7c5c2e", "#b42318"],
             )
             sector_fig.update_layout(
-                title="Feedback Pressure by Sector",
+                title="Monthly Feedback Pressure by Sector",
                 xaxis_title=None,
                 yaxis_title="Monthly records",
                 height=430,
@@ -1438,26 +1464,26 @@ def main() -> None:
             st.plotly_chart(sector_fig, width="stretch")
 
         with right:
-            st.markdown("#### Intervention Queue")
+            st.markdown("#### Review Queue")
             render_action_cards(build_action_queue(filtered))
 
     with brief_tab:
         render_hotspot_brief(filtered, feedback_ai)
 
     with notes_tab:
-        st.markdown("#### Public Context Anchors")
+        st.markdown("#### Methodology and Ethical Use")
         n1, n2, n3 = st.columns(3)
-        n1.metric("Reference caseload", "10.8M", "IOM DTM public context")
+        n1.metric("Scenario caseload", "10.8M", "Demo context only")
         n2.metric("Feedback privacy", "0 PII", "Synthetic text only")
         n3.metric("External cost", "$0", "No paid model or BI license")
 
         st.markdown(
             """
-            This prototype is designed as a first public demonstration, not an operational deployment.
-            State-level values and feedback records are synthetic demonstration data calibrated around public
-            humanitarian reporting themes. No personal data is included.
+            This prototype is designed as a public portfolio demonstration, not an operational deployment.
+            State-level values and feedback records are synthetic case-study data calibrated around public
+            humanitarian reporting themes. The dashboard does not contain personal data or live field assessments.
 
-            Public sources to reference in the case study:
+            Public sources that can be cited for context when writing about the case study:
 
             - IOM DTM Sudan Mobility Tracking: https://dtm.iom.int/sudan
             - HDX Sudan IOM DTM dataset page: https://data.humdata.org/dataset/sdn-iom-dtm-from-api
@@ -1469,9 +1495,9 @@ def main() -> None:
         st.markdown(
             """
             #### LinkedIn Positioning
-            Use this as a visual proof-of-concept: AI does not need to begin with expensive infrastructure.
-            Even a lightweight local model can classify community feedback, surface hotspots, and help teams
-            discuss prioritization with more evidence and transparency.
+            Use this as a visual proof-of-concept: useful humanitarian AI can start with transparent
+            data preparation, clear assumptions, and human review. The value is not automatic decision-making;
+            it is faster triage, better documentation, and a more structured conversation about priorities.
             """
         )
 
