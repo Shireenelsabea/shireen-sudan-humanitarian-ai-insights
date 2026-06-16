@@ -1,0 +1,471 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[a4paper,margin=0.82in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{caption}
+
+\definecolor{DeepGreen}{HTML}{2D6A4F}
+\definecolor{DeepTeal}{HTML}{287271}
+\definecolor{SignalOrange}{HTML}{F97316}
+\definecolor{RiskRed}{HTML}{C44536}
+\definecolor{SoftGray}{HTML}{5F6F67}
+\definecolor{LightPanel}{HTML}{F6F7F3}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=DeepGreen,
+  urlcolor=DeepTeal,
+  citecolor=DeepGreen,
+  pdftitle={Sudan Humanitarian AI Insights Technical Dossier},
+  pdfauthor={Shireen El Sabea}
+}
+
+\pagestyle{fancy}
+\setlength{\headheight}{14pt}
+\fancyhf{}
+\lhead{\textcolor{DeepGreen}{Sudan Humanitarian AI Insights}}
+\rhead{\textcolor{SoftGray}{Technical Dossier}}
+\cfoot{\thepage}
+
+\titleformat{\section}{\Large\bfseries\color{DeepGreen}}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\large\bfseries\color{DeepTeal}}{\thesubsection}{0.8em}{}
+\captionsetup{font=small,labelfont=bf}
+\setlist[itemize]{leftmargin=1.2em,itemsep=0.2em}
+\setlist[enumerate]{leftmargin=1.4em,itemsep=0.2em}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\emergencystretch=2em
+
+\begin{document}
+
+\pagenumbering{gobble}
+\begin{titlepage}
+  \centering
+  \vspace*{0.25in}
+  \includegraphics[width=0.22\textwidth]{assets/impact_bridge_logo.png}
+
+  \vspace{0.35in}
+  {\Huge\bfseries\color{DeepGreen} Sudan Humanitarian AI Insights\par}
+  \vspace{0.14in}
+  {\Large Technical Dossier for an AI-Assisted Humanitarian Needs Dashboard\par}
+
+  \vspace{0.35in}
+  \fcolorbox{DeepGreen}{LightPanel}{
+    \begin{minipage}{0.88\textwidth}
+      \vspace{0.16in}
+      \textbf{Purpose:} Document the design, data model, analytical method, visual outputs, ethical guardrails, and deployment approach for a first-phase humanitarian AI dashboard focused on Sudan.
+
+      \vspace{0.12in}
+      \textbf{Creator:} Shireen El Sabea
+
+      \textbf{LinkedIn:} \href{https://www.linkedin.com/in/shireenalsabea/}{linkedin.com/in/shireenalsabea}
+
+      \textbf{Email:} \href{mailto:sabeashireen@gmail.com}{sabeashireen@gmail.com}
+
+      \vspace{0.12in}
+      \textbf{Version:} June 2026
+      \vspace{0.16in}
+    \end{minipage}
+  }
+
+  \vfill
+  {\large Responsible AI for community feedback, needs analysis, and decision-support dashboards\par}
+\end{titlepage}
+
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+\section{Executive Brief}
+
+\textbf{Sudan Humanitarian AI Insights} is a Streamlit-based analytics dashboard designed by Shireen El Sabea to demonstrate how AI-assisted data analysis can support humanitarian prioritization. The dashboard converts public-context-informed data and synthetic community feedback into hotspot scores, sector pressure visuals, local NLP triage, and downloadable AI Action Briefs.
+
+This dossier expands the prototype into a technical case-study package. It documents the problem framing, data structure, analytics method, visual outputs, system architecture, ethical constraints, deployment options, and future roadmap.
+
+The project is not presented as an operational humanitarian system. It is a responsible public demonstration using synthetic data and transparent scoring. Contextual references are drawn from recognized sources such as IOM DTM, HDX, OCHA, ReliefWeb, and ACLED \cite{iomdtm,hdxdtm,ocha2025,reliefweb2025,acledsudan}.
+
+\begin{table}[H]
+\centering
+\caption{Dossier Metadata}
+\begin{tabularx}{\textwidth}{p{0.26\textwidth}Y}
+\toprule
+\textbf{Field} & \textbf{Description} \\
+\midrule
+Project title & Sudan Humanitarian AI Insights \\
+Creator & Shireen El Sabea \\
+Primary use case & AI-assisted humanitarian hotspot analysis and action briefing \\
+Technology stack & Streamlit, Pandas, NumPy, Plotly, Matplotlib, local CSV datasets \\
+Data status & Synthetic demonstration data calibrated around public humanitarian themes \\
+Privacy posture & No personally identifiable information, no private field data, no paid API dependency \\
+Primary audience & NGOs, humanitarian data teams, donors, social-impact employers, and portfolio reviewers \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Humanitarian Context}
+
+Sudan remains one of the most complex humanitarian operating environments in the world. IOM's Displacement Tracking Matrix is used to monitor displacement and mobility patterns, while HDX republishes IOM DTM data for humanitarian data users \cite{iomdtm,hdxdtm}. OCHA's 2025 planning documents describe a large-scale response environment requiring safe, timely, principled, and gender-responsive assistance \cite{ocha2025}. Conflict event monitoring from ACLED provides an additional lens for understanding violence, access limitations, and civilian risk \cite{acledsudan,acledfatality}.
+
+For a public portfolio project, the ethical challenge is clear: it is valuable to demonstrate analytical capability, but it is not appropriate to expose real community feedback or personal data. The dashboard therefore uses a synthetic scenario dataset, while citing official sources only for context.
+
+\section{Problem Definition}
+
+Humanitarian teams often receive fragmented signals from multiple channels: displacement updates, partner reports, coordination meetings, community feedback, field assessments, and access reports. These signals can be hard to interpret quickly when caseloads are large and resources are constrained.
+
+The prototype addresses five analytical questions:
+
+\begin{enumerate}
+  \item Which states appear most urgent under a transparent composite score?
+  \item Which sector pressures are driving the hotspot ranking?
+  \item How can synthetic unstructured feedback be classified into humanitarian sectors?
+  \item How can feedback and displacement trends support planning discussions?
+  \item How can the dashboard convert analysis into a short decision-support brief?
+\end{enumerate}
+
+\section{Solution Overview}
+
+The dashboard is structured around a data-to-decision workflow. The core product idea is not merely to show charts, but to convert signals into a practical response discussion.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{reports/figures/technical_pipeline.png}
+\caption{Technical workflow from data ingestion to AI Action Brief generation.}
+\end{figure}
+
+\subsection{Dashboard Modules}
+
+\begin{table}[H]
+\centering
+\caption{Dashboard Modules and Analytical Purpose}
+\begin{tabularx}{\textwidth}{p{0.24\textwidth}Y}
+\toprule
+\textbf{Module} & \textbf{Purpose} \\
+\midrule
+Operations View & Presents key performance indicators, a geographic priority view, ranked hotspots, and a sector pressure matrix. \\
+Feedback Intelligence & Demonstrates local NLP-style classification of synthetic community feedback by sector, urgency, sentiment, and confidence. \\
+Forecast and Actions & Shows monthly displacement and feedback trends, then converts priority scores into an intervention queue. \\
+Hotspot Brief & Generates an AI Action Brief for a selected hotspot, including drivers, next steps, related feedback signals, and downloadable text. \\
+Data Notes & Documents public context sources, synthetic data limitations, and ethical guardrails. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Data Architecture}
+
+The prototype uses three local CSV files. This makes the project reproducible, easy to inspect, and suitable for deployment without external credentials.
+
+\begin{longtable}{p{0.24\textwidth}p{0.20\textwidth}p{0.46\textwidth}}
+\caption{Dataset Inventory and Role in the Dashboard} \\
+\toprule
+\textbf{Dataset} & \textbf{Record Grain} & \textbf{Role} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Dataset} & \textbf{Record Grain} & \textbf{Role} \\
+\midrule
+\endhead
+\texttt{state\_needs.csv} & Sudan state & Stores IDP estimates, household estimates, child share, food pressure, WASH gap, health gap, access constraint, protection alerts, and funding gap. \\
+\texttt{monthly\_trends.csv} & Month & Stores displacement trend and synthetic feedback pressure by sector. \\
+\texttt{feedback\_samples.csv} & Feedback message & Stores synthetic SMS, WhatsApp, and voice-note examples with sector, urgency, state, and population group labels. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Data Governance Notes}
+
+\begin{itemize}
+  \item All feedback records are synthetic examples.
+  \item No household names, phone numbers, addresses, registration IDs, or precise sensitive locations are stored.
+  \item Public sources are used as contextual anchors, not as direct operational claims.
+  \item Any future real deployment would require data sharing agreements, consent processes, access controls, and safeguarding review.
+\end{itemize}
+
+\section{Analytical Model}
+
+\subsection{Composite Priority Score}
+
+The priority score combines normalized displacement pressure with sector and operational pressure indicators. The score is intentionally simple and explainable:
+
+\begin{equation}
+\begin{aligned}
+Priority = 100 \times (&0.26D + 0.20F + 0.15W + 0.12H \\
+&+ 0.12A + 0.10P + 0.05G)
+\end{aligned}
+\end{equation}
+
+where \(D\) is normalized displacement volume, \(F\) is food insecurity pressure, \(W\) is WASH gap, \(H\) is health gap, \(A\) is access constraint, \(P\) is normalized protection pressure, and \(G\) is funding gap.
+
+\begin{table}[H]
+\centering
+\caption{Priority Score Weighting}
+\begin{tabularx}{\textwidth}{p{0.34\textwidth}p{0.18\textwidth}Y}
+\toprule
+\textbf{Driver} & \textbf{Weight} & \textbf{Rationale} \\
+\midrule
+Displacement volume & 0.26 & Large caseloads increase the scale of response required. \\
+Food insecurity pressure & 0.20 & Food access is a core lifesaving concern. \\
+WASH gap & 0.15 & Water and sanitation gaps can quickly create health and protection risks. \\
+Health gap & 0.12 & Health service gaps indicate limited treatment and referral capacity. \\
+Access constraint & 0.12 & High access constraints reduce response feasibility and require coordination. \\
+Protection alerts & 0.10 & Protection issues require rapid safeguarding review. \\
+Funding gap & 0.05 & Funding pressure affects the ability to respond at scale. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Local NLP Feedback Triage}
+
+The prototype uses a transparent keyword-based classifier. It maps synthetic messages into sectors such as Food Security, WASH, Health, Shelter, Protection, Child Protection, and Registration.
+
+This is not a substitute for a trained language model. It is used to demonstrate the workflow:
+
+\begin{enumerate}
+  \item Receive unstructured text.
+  \item Match sector-specific terms.
+  \item Detect urgency terms such as unsafe, sick, children, blocked, flood, malaria, or ran out.
+  \item Assign sector, urgency, sentiment, confidence, and matched terms.
+  \item Surface the classified signal in the dashboard.
+\end{enumerate}
+
+\section{Visual Analysis}
+
+\subsection{Hotspot Ranking}
+
+The first visual output ranks the highest-priority states. The model identifies South Darfur and North Darfur as the highest-scoring hotspots in the demonstration dataset.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{reports/figures/priority_hotspots.png}
+\caption{Top 10 hotspot ranking by transparent composite score.}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Top Five Hotspots in the Demonstration Dataset}
+\begin{tabular}{lrrrrl}
+\toprule
+\textbf{State} & \textbf{Score} & \textbf{IDPs} & \textbf{Food} & \textbf{Access} & \textbf{Level} \\
+\midrule
+South Darfur & 89.7 & 1.65M & 94\% & 91\% & Critical \\
+North Darfur & 83.3 & 1.41M & 93\% & 88\% & Critical \\
+Central Darfur & 70.1 & 0.79M & 92\% & 89\% & High \\
+West Darfur & 62.7 & 0.51M & 91\% & 86\% & High \\
+East Darfur & 58.0 & 0.54M & 89\% & 78\% & Elevated \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Sector Pressure Matrix}
+
+The heatmap explains why locations rank highly. Rather than hiding the model behind a single score, it shows the underlying pressure drivers.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth]{reports/figures/sector_pressure_heatmap.png}
+\caption{Sector pressure matrix for the highest-ranked states.}
+\end{figure}
+
+\subsection{Trend and Forecasting View}
+
+The monthly trend figure shows how displacement estimates and synthetic feedback volume can be viewed together. In a real deployment, this view would need direct validation against current data pipelines and field assessments.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{reports/figures/monthly_trends.png}
+\caption{Monthly displacement and synthetic feedback signal trend.}
+\end{figure}
+
+\subsection{Feedback Urgency}
+
+The feedback urgency chart demonstrates how community messages can be organized by sector and triage status.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.88\textwidth]{reports/figures/feedback_urgency.png}
+\caption{Synthetic feedback records grouped by sector and urgency.}
+\end{figure}
+
+\section{AI Action Brief Design}
+
+The AI Action Brief is the most important employer-facing component because it converts dashboard outputs into a decision-support artifact.
+
+\begin{table}[H]
+\centering
+\caption{AI Action Brief Content Model}
+\begin{tabularx}{\textwidth}{p{0.28\textwidth}Y}
+\toprule
+\textbf{Brief Section} & \textbf{Purpose} \\
+\midrule
+Priority summary & Shows state, priority level, score, IDP estimate, and child estimate. \\
+Top drivers & Identifies why the location was selected. \\
+Recommended posture & Explains how the dashboard output should be used in planning. \\
+Next validation steps & Keeps human review and field confirmation central. \\
+Related feedback signals & Links selected state to synthetic community feedback messages. \\
+Downloadable text & Makes the output portable for coordination or donor notes. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Technical Implementation}
+
+\subsection{Application Stack}
+
+\begin{table}[H]
+\centering
+\caption{Technical Stack}
+\begin{tabularx}{\textwidth}{p{0.25\textwidth}Y}
+\toprule
+\textbf{Layer} & \textbf{Implementation} \\
+\midrule
+Frontend application & Streamlit multipage-style interface with tabs, filters, metrics, charts, and download controls. \\
+Data processing & Pandas and NumPy for loading CSV files, normalizing indicators, scoring hotspots, and preparing summaries. \\
+Visualization & Plotly in the live dashboard; Matplotlib and Seaborn for report figures. \\
+Branding & Project logo embedded in the app, static landing page, and PDF dossier. \\
+Deployment assets & Streamlit app for interactive hosting, plus static \texttt{docs/index.html} for GitHub Pages or Vercel landing pages. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Repository Structure}
+
+\begin{verbatim}
+AI_NGO/
+  app/app.py
+  data/state_needs.csv
+  data/monthly_trends.csv
+  data/feedback_samples.csv
+  assets/impact_bridge_logo.png
+  docs/index.html
+  reports/study_report.tex
+  reports/generate_figures.py
+  reports/figures/
+  output/pdf/study_report.pdf
+  requirements.txt
+\end{verbatim}
+
+\section{Ethical and Operational Guardrails}
+
+Humanitarian AI systems can create harm when they obscure uncertainty, expose sensitive populations, or automate decisions that require human judgment. The prototype therefore follows these guardrails:
+
+\begin{itemize}
+  \item \textbf{No PII:} The public demo uses no names, phone numbers, documents, IDs, or household-level data.
+  \item \textbf{Synthetic feedback:} Community messages are demonstration samples only.
+  \item \textbf{Explainable scoring:} Users can see the drivers behind the score.
+  \item \textbf{Human validation:} The dashboard supports field validation, not automated allocation.
+  \item \textbf{Protection sensitivity:} Protection signals should be handled through safeguarding channels.
+  \item \textbf{Bias control:} Future model versions would require local language review, representative data, and continuous error monitoring.
+\end{itemize}
+
+\section{Limitations}
+
+\begin{table}[H]
+\centering
+\caption{Current Limitations and Mitigation Direction}
+\begin{tabularx}{\textwidth}{p{0.30\textwidth}Y}
+\toprule
+\textbf{Limitation} & \textbf{Mitigation Direction} \\
+\midrule
+Synthetic data only & Replace with aggregate, approved, non-PII datasets under data governance agreements. \\
+Keyword-based NLP & Move toward validated multilingual NLP models with human review and error analysis. \\
+Simple linear forecast & Add time-series validation, confidence intervals, and scenario assumptions. \\
+No authentication layer & Add role-based access control before any sensitive deployment. \\
+No live humanitarian API integration & Add scheduled ingestion only after source licensing and reliability review. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Deployment Architecture}
+
+The interactive dashboard is a Streamlit application. Streamlit Community Cloud is the recommended target for the live app. GitHub Pages and Vercel are suitable for the static landing page, not the interactive dashboard server.
+
+\begin{enumerate}
+  \item Push the repository to GitHub.
+  \item Deploy \texttt{app/app.py} on Streamlit Community Cloud.
+  \item Publish \texttt{docs/index.html} through GitHub Pages or Vercel.
+  \item Replace the landing-page dashboard placeholder link with the live Streamlit URL.
+\end{enumerate}
+
+\section{Roadmap}
+
+\begin{table}[H]
+\centering
+\caption{Suggested Roadmap}
+\begin{tabularx}{\textwidth}{p{0.18\textwidth}p{0.28\textwidth}Y}
+\toprule
+\textbf{Phase} & \textbf{Focus} & \textbf{Output} \\
+\midrule
+Phase 1 & Public proof of concept & Current dashboard, static landing page, LinkedIn post, and PDF dossier. \\
+Phase 2 & Data validation & Replace synthetic indicators with approved aggregate public data extracts. \\
+Phase 3 & Model improvement & Add multilingual NLP, uncertainty labels, and model evaluation tables. \\
+Phase 4 & Operational pilot & Add user roles, audit logs, data protection review, and partner validation workflow. \\
+Phase 5 & Portfolio expansion & Record a walkthrough video and publish a technical blog post. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Conclusion}
+
+The Sudan Humanitarian AI Insights dashboard demonstrates a practical, responsible way to communicate the potential of AI in humanitarian work. Its strongest value is not the score alone, but the complete workflow: data is structured, feedback is triaged, hotspots are explained, and action briefs are generated with explicit human validation steps.
+
+This makes the project suitable for LinkedIn presentation, portfolio review, and early conversations with NGOs or social-impact employers.
+
+\section{Call to Action}
+
+Shireen El Sabea is open to collaboration with NGOs, humanitarian data teams, donors, and social-impact employers interested in responsible AI for community feedback, needs analysis, and decision-support dashboards.
+
+\begin{itemize}
+  \item LinkedIn: \href{https://www.linkedin.com/in/shireenalsabea/}{https://www.linkedin.com/in/shireenalsabea/}
+  \item Email: \href{mailto:sabeashireen@gmail.com}{sabeashireen@gmail.com}
+\end{itemize}
+
+\begin{thebibliography}{9}
+
+\bibitem{iomdtm}
+International Organization for Migration.
+\textit{Sudan Displacement Tracking Matrix}.
+\url{https://dtm.iom.int/sudan}
+
+\bibitem{hdxdtm}
+Humanitarian Data Exchange.
+\textit{Sudan IOM Displacement Tracking Matrix (DTM) from API}.
+\url{https://data.humdata.org/dataset/sdn-iom-dtm-from-api}
+
+\bibitem{ocha2025}
+United Nations Office for the Coordination of Humanitarian Affairs.
+\textit{Sudan Humanitarian Needs and Response Plan 2025 Executive Summary}.
+\url{https://www.unocha.org/publications/report/sudan/sudan-humanitarian-needs-and-response-plan-2025-executive-summary-december-2024-enar}
+
+\bibitem{humanitarianaction2025}
+OCHA Humanitarian Action.
+\textit{Sudan Humanitarian Response Plan 2025}.
+\url{https://humanitarianaction.info/plan/1220}
+
+\bibitem{reliefweb2025}
+ReliefWeb.
+\textit{IOM Sudan Displacement Tracking Matrix: Sudan Mobility Update 16}.
+\url{https://reliefweb.int/report/sudan/iom-sudan-displacement-tracking-matrix-dtm-sudan-mobility-update-16-publication-date-23-march-2025}
+
+\bibitem{acledsudan}
+Armed Conflict Location and Event Data Project.
+\textit{Sudan Country Data and Analysis}.
+\url{https://acleddata.com/country/sudan}
+
+\bibitem{acledfatality}
+Armed Conflict Location and Event Data Project.
+\textit{How to Interpret ACLED's Fatality Records in Sudan}.
+\url{https://acleddata.com/methodology/how-interpret-acleds-fatality-records-sudan}
+
+\end{thebibliography}
+
+\end{document}

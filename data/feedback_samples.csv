@@ -1,0 +1,31 @@
+date,state,channel,message,sector,urgency,population_group
+2024-08-02,South Darfur,SMS,"Families in the school shelter have no flour left and children are sleeping without meals.",Food Security,Critical,Children
+2024-08-03,North Darfur,WhatsApp,"The water point is broken again and people are using unsafe water from the valley.",WASH,Critical,General
+2024-08-03,Central Darfur,Voice Note,"There are no lights near the latrines and women feel unsafe at night.",Protection,High,Women
+2024-08-04,White Nile,SMS,"The clinic ran out of fever medicine and several children are sick.",Health,Critical,Children
+2024-08-04,Aj Jazirah,WhatsApp,"New arrivals need plastic sheets before the next rain.",Shelter,High,New arrivals
+2024-08-05,North Kordofan,SMS,"Food prices increased and the cash support is no longer enough for large families.",Food Security,High,Families
+2024-08-06,South Kordofan,Voice Note,"The road is blocked and the mobile health team has not reached the settlement.",Health,High,General
+2024-08-07,West Darfur,SMS,"Several children were separated during movement and families are asking for tracing support.",Protection,Critical,Children
+2024-08-08,Gedaref,WhatsApp,"Soap and hygiene kits are finished in our block.",WASH,High,General
+2024-08-08,Kassala,SMS,"Pregnant women need transport to the health center.",Health,High,Women
+2024-08-09,Blue Nile,WhatsApp,"The temporary shelters leak when it rains and blankets are wet.",Shelter,High,Families
+2024-08-09,Khartoum,SMS,"People are scared to cross the checkpoint to register for assistance.",Protection,High,General
+2024-08-10,East Darfur,Voice Note,"We received sorghum but there is not enough cooking oil for the families.",Food Security,Medium,Families
+2024-08-11,Sennar,SMS,"The latrines are full and children are getting stomach pain.",WASH,Critical,Children
+2024-08-11,River Nile,WhatsApp,"Older people need regular medicine for blood pressure.",Health,Medium,Older people
+2024-08-12,Northern,SMS,"The distribution list missed newly displaced households.",Registration,Medium,New arrivals
+2024-08-12,Red Sea,WhatsApp,"Families need more shade materials because the heat is severe.",Shelter,Medium,Families
+2024-08-13,South Darfur,SMS,"There is harassment near the water queue and women ask for safer collection times.",Protection,High,Women
+2024-08-13,North Darfur,Voice Note,"Milk for infants is not available in the market.",Food Security,High,Infants
+2024-08-14,Central Darfur,SMS,"The hand pump works only one hour a day and queues are very long.",WASH,High,General
+2024-08-14,West Kordofan,WhatsApp,"The tent area is crowded and families need privacy partitions.",Shelter,Medium,Families
+2024-08-15,South Kordofan,SMS,"Malaria cases are increasing and there are not enough test kits.",Health,Critical,General
+2024-08-15,West Darfur,WhatsApp,"Women asked for separate latrines and better lighting.",Protection,High,Women
+2024-08-16,Aj Jazirah,SMS,"Bread is available but families cannot afford it after losing income.",Food Security,High,Families
+2024-08-16,White Nile,Voice Note,"The water truck did not arrive yesterday and people are sharing from one tank.",WASH,High,General
+2024-08-17,North Kordofan,SMS,"Children have no safe space and spend the day near the road.",Child Protection,High,Children
+2024-08-18,Gedaref,WhatsApp,"A new group arrived last night and needs emergency food rations.",Food Security,Critical,New arrivals
+2024-08-18,Kassala,SMS,"Many families lost documents during flight and need registration help.",Registration,Medium,Families
+2024-08-19,Blue Nile,Voice Note,"Flood water damaged shelters and people are sleeping outside.",Shelter,Critical,Families
+2024-08-20,Khartoum,SMS,"The health post has no clean delivery supplies.",Health,Critical,Women

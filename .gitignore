@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.streamlit/server.log
+.streamlit/server.err
+tmp/
+output/pdf/*.aux
+output/pdf/*.log
+output/pdf/*.out
+output/pdf/*.toc
+AI Project Ideas for NGO Case Study.zip
